@@ -13,10 +13,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'zoocityboy',
+      title: 'zoocityboy, dart & flutter developer',
       theme: lightTheme(),
       darkTheme: darkTheme(),
-      themeMode: ThemeMode.system,
+      themeMode: ThemeMode.dark,
       home: const MainScreen(),
     );
   }

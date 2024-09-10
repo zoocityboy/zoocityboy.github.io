@@ -11,12 +11,13 @@ class CircleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return ClipRRect(
       clipBehavior: Clip.antiAlias,
       child: CustomPaint(
         painter: _OpenPainter(
           radius: 150,
-          color: Colors.white10,
+          color: isDark ? Colors.white10 : Colors.black12,
           offset: Offset.zero,
         ),
         child: child,

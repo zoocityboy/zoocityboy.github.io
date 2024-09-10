@@ -31,7 +31,7 @@ class FooterWidget extends StatelessWidget {
             TextButton.icon(
                 onPressed: _launchTwitterUrl,
                 icon: const Icon(Ionicons.logo_twitter, size: 12),
-                label: const Text('Twitter/X')),
+                label: const Text('X')),
             Text(
               'Made with Flutter WASM by 🦏 @zoocityboy',
               style: Theme.of(context).textTheme.bodySmall,

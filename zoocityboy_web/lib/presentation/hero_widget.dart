@@ -18,15 +18,20 @@ class MainHeroWidget extends StatelessWidget {
         children: [
           Center(
             child: Container(
-                clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(1000),
+              clipBehavior: Clip.antiAlias,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+              ),
+              width: 300,
+              height: 300,
+              child: BackgroundWidget(
+                child: Container(),
+              ),
+            ).animate().fadeIn(
+                  delay: 1.seconds,
+                  duration: 1.5.seconds,
+                  curve: Curves.easeInCubic,
                 ),
-                width: 300,
-                height: 300,
-                child: BackgroundWidget(
-                  child: Container(),
-                )),
           ),
           Center(
             child: ConstrainedBox(
@@ -36,7 +41,7 @@ class MainHeroWidget extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     const SizedBox(
-                      height: 32,
+                      height: 64,
                     ),
                     Text(
                       'What\'s a year?',
