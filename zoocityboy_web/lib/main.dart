@@ -8,17 +8,15 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'zoocityboy',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      darkTheme: kDarkTheme,
-      themeMode: ThemeMode.dark,
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
+      themeMode: ThemeMode.system,
       home: const MainScreen(),
     );
   }
