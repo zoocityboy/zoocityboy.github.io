@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:zoocityboy_web/presentation/title_view.dart';
 
 import '../painter/circle_painter.dart';
-import 'background_widget.dart';
+import 'background_mash.dart';
 import 'footer_widget.dart';
 
 class MainHeroWidget extends StatelessWidget {
@@ -16,6 +16,15 @@ class MainHeroWidget extends StatelessWidget {
       child: Stack(
         fit: StackFit.expand,
         children: [
+          // Positioned.fill(child: LayoutBuilder(builder: (context, constraints) {
+          //   return CustomPaint(
+          //     painter: CirclePainter(
+          //       radius: constraints.maxWidth / 3,
+          //       color: Colors.white.withOpacity(.1),
+          //       strokeWidth: 2,
+          //     ),
+          //   );
+          // })),
           Center(
             child: Container(
               clipBehavior: Clip.antiAlias,
@@ -24,9 +33,7 @@ class MainHeroWidget extends StatelessWidget {
               ),
               width: 300,
               height: 300,
-              child: BackgroundWidget(
-                child: Container(),
-              ),
+              child: const MeshGradientWidget(),
             ).animate().fadeIn(
                   delay: 1.seconds,
                   duration: 1.5.seconds,
@@ -44,7 +51,7 @@ class MainHeroWidget extends StatelessWidget {
                       height: 64,
                     ),
                     Text(
-                      'What\'s a year?',
+                      'Current year?',
                       style: textTheme.headlineMedium,
                     ),
                     const SizedBox(height: 16),

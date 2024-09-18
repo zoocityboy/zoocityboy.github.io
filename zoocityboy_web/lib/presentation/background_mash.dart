@@ -32,7 +32,10 @@ class _MeshGradientWidgetState extends State<MeshGradientWidget> {
         const Color(0xff004e61).semiTransparent,
         const Color(0xff590061).semiTransparent,
       ],
-      options: AnimatedMeshGradientOptions(),
+      options: AnimatedMeshGradientOptions(
+        frequency: 10,
+        speed: 3.0,
+      ),
       controller: _controller,
     );
   }
