@@ -7,7 +7,6 @@ import liveCode from "astro-live-code";
 // https://astro.build/config
 export default defineConfig({
   site: "https://zoocityboy.github.io/",
-  base: "zoocityboy.github.io",
   trailingSlash: "never",
   integrations: [
     starlight({
@@ -59,7 +58,7 @@ export default defineConfig({
       customCss: ["./src/tailwind.css"],
     }),
     liveCode({
-      
+
     }),
     tailwind({ applyBaseStyles: false }),
   ],
