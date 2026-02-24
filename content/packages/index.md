@@ -1,7 +1,13 @@
 ---
 title: Packages
-description: Dart packages with details, links, and install commands.
+description: List of my Dart packages with links to their repositories and Pub.dev pages.
+slug: packages
+date: 2026-02-24
+tags:
+  - packages
+  - extensions
 layout: packages_list
+
 ---
 
-Browse available packages and open each detail page for repository and installation info.
+Here are some of the Dart packages I've created, along with links to their repositories and Pub.dev pages:

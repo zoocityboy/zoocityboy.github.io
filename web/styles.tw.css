@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @theme {
   --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, "Liberation Mono", "Courier New", monospace;
@@ -49,9 +49,7 @@
     --ring: #d75f00;
   }
 
-  :root.light,
-  html.light,
-  body.light {
+    :where([data-theme=light], :root.light, html.light, body.light) {
     color-scheme: light;
     --background: #ffffff;
     --foreground: #000000;
@@ -72,9 +70,7 @@
     --ring: #d75f00;
   }
 
-  :root.dark,
-  html.dark,
-  body.dark {
+    :where([data-theme=dark], :root.dark, html.dark, body.dark) {
     color-scheme: dark;
     --background: #181a1b;
     --foreground: #e8e6e3;
@@ -136,4 +132,42 @@
   .pb-button-secondary {
     @apply inline-flex items-center border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-accent;
   }
+/* Code block styling that follows the current theme variables */
+.code-block {
+  @apply relative border border-border bg-card p-4 rounded-sm font-mono text-sm overflow-x-auto my-6;
+  color: var(--color-foreground);
+}
+
+.code-block pre,
+.code-block code {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-foreground);
+}
+
+/* Prism token overrides to better match the theme */
+.code-block .token.comment,
+.code-block .token.prolog,
+.code-block .token.doctype,
+.code-block .token.cdata {
+  color: #6b6b6b;
+}
+
+/* Small language label in the top-left of code blocks */
+.code-block::before {
+  content: attr(data-lang);
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  background-color: var(--secondary);
+  color: var(--secondary-foreground);
+  font-size: 0.625rem;
+  /* 10px */
+  padding: 0.125rem 0.5rem;
+  border-bottom-right-radius: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  pointer-events: none;
+}
 }

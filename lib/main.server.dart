@@ -2,10 +2,17 @@
 library;
 
 import 'package:jaspr/server.dart';
+import 'package:jaspr_content/components/callout.dart';
+import 'package:jaspr_content/components/markdown.dart';
 import 'package:jaspr_content/jaspr_content.dart';
+import 'package:jaspr_content/components/code_block.dart';
 import 'package:jaspr_content/theme.dart';
+import 'package:site/content/layouts/home_page_layout.dart';
+import 'package:site/content/layouts/package_detail_layout.dart';
+import 'package:site/content/layouts/packages_list_layout.dart';
+import 'package:site/content/layouts/post_layout.dart';
+import 'package:site/content/layouts/posts_layout.dart';
 
-import 'content/layouts/site_layouts.dart';
 import 'main.server.options.dart';
 
 void main() {
@@ -21,9 +28,16 @@ void main() {
         dataLoaders: [
           FilesystemDataLoader('content/_data'),
         ],
+        // Register common content components (CodeBlock enables fenced code highlighting)
+        components: [
+          CodeBlock(),
+          Callout(),
+          
+        ],
         templateEngine: MustacheTemplateEngine(),
         parsers: [
           MarkdownParser(),
+          HtmlParser(),
         ],
         layouts: [
           HomePageLayout(),

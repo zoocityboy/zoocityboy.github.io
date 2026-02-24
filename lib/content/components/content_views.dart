@@ -55,13 +55,34 @@ class SiteFrame extends StatelessComponent {
       NavComponent(),
       main_(classes: 'mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8', [
         if (title != null) ...[
+          // Breadcrumbs
+          nav(classes: 'text-sm text-muted-foreground', [
+            a(href: '/', classes: 'transition-colors hover:text-primary', [.text('Home')]),
+            span(classes: 'px-2', [.text('/')]),
+            // section link based on activePath
+            a(
+              href: activePath,
+              classes: 'transition-colors hover:text-primary',
+              [
+                .text(
+                  activePath == '/posts'
+                      ? 'Blog'
+                      : (activePath == '/packages' ? 'Packages' : activePath.replaceAll('/', '')),
+                ),
+              ],
+            ),
+            if (title != null) ...[
+              span(classes: 'px-2', [.text('/')]),
+              span(classes: 'font-medium text-foreground', [.text(title!)]),
+            ],
+          ]),
           h1(classes: 'text-4xl font-semibold tracking-tighter md:text-5xl', [.text(title!)]),
           if (subtitle != null) ...[
             p(classes: 'mt-4 max-w-[64ch] text-sm leading-7 text-muted-foreground md:text-base', [
               .text(subtitle!),
             ]),
           ],
-          div([], classes: 'mt-8 border-t border-border'),
+          div(classes: 'mt-8 border-t border-border', []),
         ],
         div(classes: title != null ? 'mt-8' : '', [child]),
       ]),
@@ -228,8 +249,13 @@ class PackageDetailView extends StatelessComponent {
       ]),
       section(classes: 'border border-border bg-card p-6', [
         h3(classes: 'text-lg font-semibold tracking-tight text-card-foreground', [.text('Install')]),
-        pre(classes: 'mt-3 border border-border bg-muted p-4 text-sm overflow-x-auto', [
-          code([.text('dart pub add $name')]),
+        // Use same markdown code-block styling and language class so Prism and our .code-block styles apply
+        div(classes: 'mt-3', [
+          div(classes: 'code-block', [
+            pre(classes: 'border border-border bg-muted p-4 text-sm overflow-x-auto', [
+              code(classes: 'language-dart', [.text('dart pub add $name')]),
+            ]),
+          ]),
         ]),
       ]),
     ]);
