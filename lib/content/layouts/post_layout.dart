@@ -43,20 +43,23 @@ class PostLayout extends PageLayoutBase {
   @override
   Component buildBody(Page page, Component child) {
     final Map<String, dynamic> meta = pageMeta(page);
+    final String slug = meta['slug']?.toString() ?? '';
 
     return SiteFrame(
       activePath: '/posts',
       title: meta['title']?.toString() ?? 'Blog Post',
       subtitle: meta['description']?.toString(),
-      child: article(classes: 'border border-border bg-card p-6 md:p-8', [
-        if (meta['date'] != null) ...[
-          p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
-            .text(meta['date'].toString()),
-          ]),
-          div(classes: 'mt-4 border-t border-border', []),
-        ],
-        div(classes: 'prose prose-sm mt-6 max-w-none text-foreground', [child]),
-      ]),
+      child: slug.isNotEmpty
+          ? PostDetailView(slug: slug)
+          : article(classes: 'border border-border bg-card p-6 md:p-8', [
+              if (meta['date'] != null) ...[
+                p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
+                  .text(meta['date'].toString()),
+                ]),
+                div(classes: 'mt-4 border-t border-border', []),
+              ],
+              div(classes: 'prose prose-sm mt-6 max-w-none text-foreground', [child]),
+            ]),
     );
   }
 }

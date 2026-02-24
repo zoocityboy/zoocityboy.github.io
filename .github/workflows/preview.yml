@@ -1,0 +1,51 @@
+name: Deploy PR previews
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+concurrency:
+  group: preview-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    name: Build and deploy PR preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+
+      - name: Install Jaspr CLI
+        run: dart pub global activate jaspr_cli
+
+      - name: Build site
+        if: github.event.action != 'closed'
+        run: |
+          jaspr build
+          if [ -d build/jaspr ]; then echo "build/jaspr exists"; fi
+
+      - name: Deploy PR preview
+        uses: rossjrw/pr-preview-action@v1
+        id: preview-step
+        with:
+          source-dir: ./build/jaspr
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
+          comment: true
+          qr-code: true
+
+    permissions:
+      contents: write
+      pages: write
+      id-token: write

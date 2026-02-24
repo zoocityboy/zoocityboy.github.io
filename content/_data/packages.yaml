@@ -1,11 +1,16 @@
 items:
   - slug: nocterm_bloc
     name: nocterm_bloc
-    summary: A small, pragmatic Bloc utilities package inspired by terminal-first workflows—helpers for easy state management.
-    pubUrl: https://pub.dev/packages/nocterm_bloc
+    summary: Pragmatic Bloc helpers and small utilities for terminal-first or minimal UI Dart projects.
+    url: https://pub.dev/packages/nocterm_bloc
     repository: https://github.com/zoocityboy/nocterm_bloc
   - slug: nocterm_lints
     name: nocterm_lints
-    summary: Opinionated lint rules tailored for nocterm projects and terminal-centric Dart apps.
-    pubUrl: https://pub.dev/packages/nocterm_lints
+    summary: Opinionated lint rules for small, terminal-centric Dart projects and libraries.
+    url: https://pub.dev/packages/nocterm_lints
     repository: https://github.com/zoocityboy/nocterm_lints
+  - slug: nocterm_dev
+    name: nocterm_dev
+    summary: A terminal-first Visual Studio Code extension that surfaces quick terminal commands, snippets, and focused keybindings for developer workflows.
+    url: https://marketplace.visualstudio.com/items?itemName=zoocityboy.nocterm-dev
+    repository: https://github.com/zoocityboy/nocterm-dev

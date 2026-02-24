@@ -15,6 +15,20 @@ Map<String, dynamic> _pageMeta(Page page) {
   return _asStringMap(page.data['page']);
 }
 
+List<Map<String, dynamic>> _postItemsFromData(Object? rawPostsData) {
+  final Object? source = rawPostsData is Map ? rawPostsData['items'] ?? rawPostsData['posts'] : rawPostsData;
+
+  if (source is! List) {
+    return <Map<String, dynamic>>[];
+  }
+
+  return source
+      .whereType<Object>()
+      .map((Object post) => _asStringMap(post))
+      .where((Map<String, dynamic> post) => post.isNotEmpty)
+      .toList();
+}
+
 List<Map<String, dynamic>> _packageItemsFromData(Object? rawPackagesData) {
   final Object? source = rawPackagesData is Map
       ? rawPackagesData['items'] ?? rawPackagesData['packages']
@@ -56,7 +70,7 @@ class SiteFrame extends StatelessComponent {
       main_(classes: 'mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8', [
         if (title != null) ...[
           // Breadcrumbs
-          nav(classes: 'text-sm text-muted-foreground', [
+          nav(classes: 'text-sm text-muted-foreground py-2', [
             a(href: '/', classes: 'transition-colors hover:text-primary', [.text('Home')]),
             span(classes: 'px-2', [.text('/')]),
             // section link based on activePath
@@ -96,45 +110,39 @@ class BlogPostListView extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-    final List<Page> blogPosts = context.pages.where((Page page) {
-      final Map<String, dynamic> meta = _pageMeta(page);
-      final bool isBlogPath = page.path.startsWith('blog/');
-      final bool isIndex = page.path.endsWith('blog/index.md') || page.path == 'blog/index.md';
-      final bool isPost = meta['type']?.toString() == 'post';
-      return isBlogPath && !isIndex && isPost;
-    }).toList();
+    // Use YAML-driven posts from `content/_data/posts.yaml` (available as `page.data['posts']`)
+    final List<Map<String, dynamic>> yamlPosts = _postItemsFromData(context.page.data['posts']);
 
-    blogPosts.sort((Page a, Page b) {
-      final DateTime dateA =
-          DateTime.tryParse(_pageMeta(a)['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-      final DateTime dateB =
-          DateTime.tryParse(_pageMeta(b)['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-      return dateB.compareTo(dateA);
-    });
-
-    if (blogPosts.isEmpty) {
+    if (yamlPosts.isEmpty) {
       return div(classes: 'border border-border bg-card p-6', [
         p(classes: 'text-sm text-muted-foreground', [.text('No blog posts published yet.')]),
       ]);
     }
 
+    yamlPosts.sort((a, b) {
+      final DateTime dateA = DateTime.tryParse(a['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+      final DateTime dateB = DateTime.tryParse(b['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+      return dateB.compareTo(dateA);
+    });
+
     return div(classes: 'grid gap-3', [
-      ...blogPosts.map((Page post) {
-        final Map<String, dynamic> meta = _pageMeta(post);
-        final String title = meta['title']?.toString() ?? post.path;
-        final String description = meta['description']?.toString() ?? '';
-        final String date = meta['date']?.toString() ?? '';
+      ...yamlPosts.map((Map<String, dynamic> post) {
+        final String slug = post['slug']?.toString() ?? '';
+        final String title = post['name']?.toString() ?? post['title']?.toString() ?? slug;
+        final String description = post['summary']?.toString() ?? post['description']?.toString() ?? '';
+        final String date = post['date']?.toString() ?? '';
+        final String url = post['url']?.toString() ?? (slug.isNotEmpty ? '/posts/$slug' : '#');
 
         return article(classes: 'border border-border bg-card p-6', [
           p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [.text(date)]),
           h2(classes: 'mt-3 text-2xl font-semibold tracking-tight text-card-foreground', [
-            a(href: post.url, classes: 'transition-colors hover:text-primary', [.text(title)]),
+            a(href: url, classes: 'transition-colors hover:text-primary', [.text(title)]),
           ]),
           if (description.isNotEmpty) ...[
             p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [.text(description)]),
           ],
           a(
-            href: post.url,
+            href: url,
             classes:
                 'mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent',
             [.text('Read post')],
@@ -163,7 +171,7 @@ class PackagesListView extends StatelessComponent {
         final String slug = package['slug']?.toString() ?? '';
         final String name = package['name']?.toString() ?? slug;
         final String summary = package['summary']?.toString() ?? '';
-        final String pubUrl = package['pubUrl']?.toString() ?? '';
+        final String pubUrl = package['url']?.toString() ?? '';
 
         return article(classes: 'border border-border bg-card p-6', [
           h2(classes: 'text-xl font-semibold tracking-tight text-card-foreground', [.text(name)]),
@@ -258,6 +266,67 @@ class PackageDetailView extends StatelessComponent {
           ]),
         ]),
       ]),
+    ]);
+  }
+}
+
+class PostDetailView extends StatelessComponent {
+  const PostDetailView({required this.slug, super.key});
+
+  final String slug;
+
+  @override
+  Component build(BuildContext context) {
+    final List<Map<String, dynamic>> posts = _postItemsFromData(context.page.data['posts']);
+
+    final Map<String, dynamic>? post = posts.cast<Map<String, dynamic>?>().firstWhere(
+      (Map<String, dynamic>? item) => item?['slug']?.toString() == slug,
+      orElse: () => null,
+    );
+
+    if (post == null) {
+      return div(classes: 'border border-border bg-card p-6', [
+        h2(classes: 'text-2xl font-semibold tracking-tight', [.text('Post not found')]),
+        p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [
+          .text('No post entry was found for slug "$slug" in content/_data/posts.yaml.'),
+        ]),
+      ]);
+    }
+
+    final String title = post['name']?.toString() ?? post['title']?.toString() ?? slug;
+    final String content = post['content']?.toString() ?? '';
+    final String date = post['date']?.toString() ?? '';
+
+    return article(classes: 'border border-border bg-card p-6 md:p-8', [
+      if (date.isNotEmpty) ...[
+        p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
+          .text(date),
+        ]),
+        div(classes: 'mt-4 border-t border-border', []),
+      ],
+      h1(classes: 'mt-6 text-3xl font-semibold tracking-tight', [.text(title)]),
+      if (content.isNotEmpty) ...[
+        div(classes: 'prose prose-sm mt-6 max-w-none text-foreground', [
+          // Convert markdown content to HTML - for now just use raw text
+          // TODO: Add markdown processing if needed
+          ...content.split('\n\n').map((String paragraph) {
+            if (paragraph.trim().isEmpty) return Component.empty();
+            if (paragraph.startsWith('## ')) {
+              return h2(classes: 'text-xl font-semibold mt-6 mb-3', [.text(paragraph.substring(3))]);
+            }
+            if (paragraph.startsWith('# ')) {
+              return h2(classes: 'text-2xl font-semibold mt-6 mb-3', [.text(paragraph.substring(2))]);
+            }
+            if (paragraph.startsWith('- ')) {
+              final List<String> items = paragraph.split('\n').where((line) => line.trim().isNotEmpty).toList();
+              return ul(classes: 'list-disc list-inside space-y-1 mt-3', [
+                ...items.map((item) => li([.text(item.substring(2).trim())])),
+              ]);
+            }
+            return p(classes: 'mt-3 leading-7', [.text(paragraph)]);
+          }),
+        ]),
+      ],
     ]);
   }
 }
