@@ -1,0 +1,16 @@
+items:
+  - slug: jaspr_content
+    name: jaspr_content
+    summary: Content plugin for Jaspr with markdown loading, frontmatter, custom layouts, and components.
+    pubUrl: https://pub.dev/packages/jaspr_content
+    repository: https://github.com/schultek/jaspr
+  - slug: jaspr_tailwind
+    name: jaspr_tailwind
+    summary: Tailwind CSS integration package for Jaspr applications.
+    pubUrl: https://pub.dev/packages/jaspr_tailwind
+    repository: https://github.com/dinko7/jaspr_tailwind
+  - slug: jaspr_router
+    name: jaspr_router
+    summary: Router package used for route-aware Jaspr applications and content routing.
+    pubUrl: https://pub.dev/packages/jaspr_router
+    repository: https://github.com/schultek/jaspr

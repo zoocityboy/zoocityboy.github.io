@@ -1,0 +1,12 @@
+items:
+  - slug: first-post
+    name: First Post
+    summary: This is the summary of the first post.
+    date: 2024-06-01
+    pubUrl: https://pub.dev/posts/first-post
+  - slug: second-post
+    name: Second Post
+    summary: This is the summary of the second post.
+    date: 2024-06-02
+    pubUrl: https://pub.dev/posts/second-post
+  
