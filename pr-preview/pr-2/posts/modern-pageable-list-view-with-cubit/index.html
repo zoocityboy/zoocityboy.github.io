@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/"/>
+    <meta charset="utf-8"/>
+    <title>Modern Pageable list view for Flutter with Cubit | ZOOCITYBOY</title>
+    <meta property="og:title" content="Modern Pageable list view for Flutter with Cubit | ZOOCITYBOY"/>
+    <link href="favicon.ico" rel="icon" type="image/png"/>
+    <meta name="description" content="A technique for pageable list views that keeps the UI seamless by paging independently per-row with Cubit-based caching."/>
+    <meta property="og:description" content="A technique for pageable list views that keeps the UI seamless by paging independently per-row with Cubit-based caching."/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link id="site-styles" href="/styles.css" rel="stylesheet"/>
+    <script>
+                (function(){
+                  function setLangLabels(){
+                    document.querySelectorAll('.code-block').forEach(function(cb){
+                      var code = cb.querySelector('code[class*="language-"]');
+                      var lang = 'code';
+                      if(code){
+                        var m = code.className.match(/language-([^\s]+)/);
+                        if(m) lang = m[1];
+                      }
+                      cb.setAttribute('data-lang', lang.toUpperCase());
+                    });
+                  }
+                  if(document.readyState === 'loading'){
+                    document.addEventListener('DOMContentLoaded', setLangLabels);
+                  } else { setLangLabels(); }
+                })();
+              
+    </script>
+    <!--$-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script id="theme-script">
+                  let userTheme = window.localStorage.getItem('jaspr:theme');
+                  if (userTheme != null) {
+                    document.documentElement.setAttribute('data-theme', userTheme);
+                  } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                  } else {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                  }
+                
+    </script>
+    <!--/-->
+    <script src="main.client.dart.js" defer></script>
+    <style>
+      .callout {
+        display: flex;
+        padding: 1rem 1.25rem;
+        margin-bottom: 0.75rem;
+        border: solid 1px;
+        border-radius: 0.75rem;
+        column-gap: 1rem;
+      }
+      .callout span:first-child {
+        padding-top: 0.25rem;
+        flex-shrink: 0;
+      }
+      .callout span:last-child > p {
+        margin: 0;
+      }
+      .callout.callout-info {
+        border: solid rgba(14,165,233,.2);
+        color: rgb(3 105 161);
+        background-color: rgba(186, 230, 253, .1);
+      }
+      .callout.callout-warning {
+        border: solid rgba(234,179,8,.2);
+        color: rgb(161 98 7);
+        background-color: hsla(53,98%,77%,.1);
+      }
+      .callout.callout-error {
+        border: solid rgba(239,68,68,.2);
+        color: rgb(185 28 28);
+        background-color: hsla(0,96%,89%,.1);
+      }
+      .callout.callout-success {
+        border: solid rgba(34,197,94,.2);
+        color: oklch(0.527 0.154 150.069);
+        background-color: rgba(187,247,208,.1);
+      }
+      [data-theme="dark"] .callout.callout-info {
+        border: solid rgba(14,165,233,.5);
+        color: inherit;
+        background-color: rgba(14,165,233,.1);
+      }
+      [data-theme="dark"] .callout.callout-warning {
+        border: solid rgba(234,179,8,.5);
+        color: inherit;
+        background-color: rgba(234,179,8,.1);
+      }
+      [data-theme="dark"] .callout.callout-error {
+        border: solid rgba(239,68,68,.5);
+        color: inherit;
+        background-color: rgba(239,68,68,.1);
+      }
+      [data-theme="dark"] .callout.callout-success {
+        border: solid rgba(34,197,94,.5);
+        color: inherit;
+        background-color: rgba(34,197,94,.1);
+      }
+      .theme-toggle {
+        display: flex;
+        padding: 0.7rem;
+        border: unset;
+        border-radius: 8px;
+        outline: unset;
+        align-items: center;
+        background-color: transparent;
+      }
+      .theme-toggle:hover {
+        background-color: color-mix(in srgb, currentColor 5%, transparent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-frame">
+      <header class="border-b border-border bg-background">
+        <div class="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 md:px-8">
+          <a class="text-sm font-semibold tracking-tight text-muted-foreground" href="/">zoocityboy</a>
+          <nav class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-[0.12em] md:flex">
+            <a class="transition-colors hover:text-foreground text-foreground" href="/posts">Posts</a>
+            <a class="transition-colors hover:text-foreground text-muted-foreground" href="/packages">Packages</a>
+            <a class="pb-button-secondary px-4 py-2" href="https://github.com/zoocityboy">GitHub</a>
+            <!--@jaspr_content:theme_toggle-->
+            <button class="theme-toggle" style="visibility: hidden" aria-label="Theme Toggle">
+              <span><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="20px" height="20px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
+              <span style="display: none"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="20px" height="20px"><circle cx="12" cy="12" r="4"></circle><path d="M12 4h.01"></path><path d="M20 12h.01"></path><path d="M12 20h.01"></path><path d="M4 12h.01"></path><path d="M17.657 6.343h.01"></path><path d="M17.657 17.657h.01"></path><path d="M6.343 17.657h.01"></path><path d="M6.343 6.343h.01"></path></svg></span>
+            </button>
+            <!--/@jaspr_content:theme_toggle-->
+          </nav>
+        </div>
+      </header>
+      <main class="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8">
+        <nav class="text-sm text-muted-foreground py-2">
+          <a class="transition-colors hover:text-primary" href="/">Home</a>
+          <span class="px-2">/</span>
+          <a class="transition-colors hover:text-primary" href="/posts">Blog</a>
+          <span class="px-2">/</span>
+          <span class="font-medium text-foreground">Modern Pageable list view for Flutter with Cubit</span>
+        </nav>
+        <h1 class="text-4xl font-semibold tracking-tighter md:text-5xl">Modern Pageable list view for Flutter with Cubit</h1>
+        <p class="mt-4 max-w-[64ch] text-sm leading-7 text-muted-foreground md:text-base">
+          A technique for pageable list views that keeps the UI seamless by paging independently per-row with Cubit-based caching.
+        </p>
+        <div class="mt-8 border-t border-border"></div>
+        <div class="mt-8">
+          <article class="border border-border bg-card p-6 md:p-8">
+            <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2023-08-16</p>
+            <div class="mt-4 border-t border-border"></div>
+            <div class="prose prose-sm mt-6 max-w-none text-foreground">
+              <section class="content">
+                <p>Seamless user interaction is our goal.</p>
+                <p>
+                  In this article I focus on optimized data loading for ListView — avoiding the typical pause while a "loading" widget appears, and skipping distance counting or brittle viewport math. The approach partitions the list into pages; each page is responsible for loading and caching its own data so the overall ListView can remain responsive and avoid full refreshes.
+                </p>
+                <p>Inspiration</p>
+                <p>
+                  The idea came from watching the Observable Flutter series with Rémi Rousselet and his Riverpod list implementation. I wanted a similar, performant solution using Cubit/Bloc (we use Bloc at work), so I reimplemented the pattern for Cubit.
+                </p>
+                <p>Prerequisites</p>
+                <p>
+                  This technique assumes your API supports standard pagination (offset, keyset, or seek pagination). It also assumes a predictable API response shape so we can convert results into a pageable model the Cubit can understand.
+                </p>
+                <p>Formalization of API responses</p>
+                <p>
+                  Since we want a generic implementation, define a stable pageable model that represents page data and metadata returned by your API. This keeps the Cubit logic decoupled from specific endpoint shapes.
+                </p>
+                <p>Common pagination styles:</p>
+                <ul>
+                  <li>Offset pagination: <code>GET /items?limit=20&amp;offset=100</code></li>
+                  <li>Keyset pagination: <code>GET /items?limit=20&amp;created:lte:2019-01-20T00:00:00</code></li>
+                  <li>Seek pagination: <code>GET /items?limit=20&amp;after_id=20</code></li>
+                </ul>
+                <p>Logic</p>
+                <p>The implementation uses two cooperating Cubits:</p>
+                <ol>
+                  <li>
+                    <code>PageableListCubit</code> — the orchestrator that initializes the first request, tracks pages, and stores a map of page-index → page-cubit/state.
+                  </li>
+                  <li>
+                    Per-page Cubits — each page has a cubit that loads its page independently and caches its state (loading, success with items, error). This separation allows the ListView to update only the visible page widgets instead of forcing a global refresh.
+                  </li>
+                </ol>
+                <p>Work with page</p>
+                <ul>
+                  <li>
+                    When initializing a page cubit you may pass an initial list of items — this is useful to seed data returned from the first request and avoid duplicate fetching.
+                  </li>
+                  <li>
+                    The API request is performed via a callback passed from <code>PageableListCubit</code> to each page cubit. After a successful fetch we create per-page cubits and store them in the success state as a map keyed by page index.
+                  </li>
+                  <li>
+                    Important: use <code>BlocProvider.value</code> when providing per-item cubits to list items so the cubit isn't closed when the item widget disposes — this preserves the cached data for future reuse.
+                  </li>
+                </ul>
+                <p>Implementation</p>
+                <p>At a high level:</p>
+                <ul>
+                  <li>
+                    Register a <code>PageableListCubit</code> with a loader function that performs the API call and returns the first page and total item information.
+                  </li>
+                  <li>
+                    During the initial load, show a Loading List view that renders placeholders (a skeleton) with the same number of items as the 
+                    <code>limit</code> so the UI layout remains stable.
+                  </li>
+                  <li>
+                    Each subsequent page is loaded when its corresponding page-cubit becomes visible (e.g., the page widget is built in the ListView), and until data arrives the page shows placeholders.
+                  </li>
+                </ul>
+                <p>Images / demo</p>
+                <p>
+                  <img src="https://miro.medium.com/v2/resize:fit:2000/format:webp/1*ChOp1OvB3CWOA33BHKocCQ.gif" alt="Demo of Modern Pageable ListView"/>
+                </p>
+                <p>Source code</p>
+                <p>
+                  Sample code and a small repository demonstrating this approach are available on GitHub: <a href="https://github.com/zoocityboy/modern_pageable_listview">modern_pageable_listview</a>
+                </p>
+                <p>Thank you for reading!</p>
+                <p>
+                  If I got something wrong, let me know in the comments — I'd love to improve. Special thanks to Felix Angelov and Rémi Rousselet for their work and inspiration.
+                </p>
+                <p>
+                  Original post: <a href="https://zoocityboy.medium.com/modern-pageable-list-view-for-flutter-with-cubit-792d52d4e168">Modern Pageable list view for Flutter with Cubit</a>
+                </p>
+              </section>
+            </div>
+          </article>
+        </div>
+      </main>
+      <footer class="border-t border-border bg-background">
+        <div class="mx-auto flex w-full max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-8">
+          <p>zoocityboy</p>
+          <div class="flex flex-wrap gap-4">
+            <a class="transition-colors hover:text-foreground" href="/">Home</a>
+            <a class="transition-colors hover:text-foreground" href="/blog">Blog</a>
+            <a class="transition-colors hover:text-foreground" href="/packages">Packages</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>
