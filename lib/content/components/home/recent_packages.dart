@@ -1,7 +1,9 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/jaspr_content.dart';
-import '../../content/layouts/site_layouts.dart';
+
+import '../../layouts/site_layouts.dart';
+
 class RecentPackagesSection extends StatelessComponent {
   const RecentPackagesSection({super.key});
 
@@ -22,25 +24,31 @@ class RecentPackagesSection extends StatelessComponent {
     return section(classes: 'space-y-8 pb-20', [
       div(classes: 'flex items-center justify-between', [
         h2(classes: 'text-3xl font-semibold tracking-tight md:text-4xl', [.text('Recent packages')]),
-        a(href: prefixPath('/packages'), classes: 'text-sm font-semibold transition-colors hover:text-foreground', [.text('All')]),
+        a(href: prefixPath('/packages'), classes: 'text-sm font-semibold transition-colors hover:text-foreground', [
+          .text('All'),
+        ]),
       ]),
       div(classes: 'grid gap-3 md:grid-cols-3', [
         if (recent.isEmpty)
-          div(classes: 'pb-card p-6', [p(classes: 'text-sm text-muted-foreground', [.text('No packages configured yet.')])])
-        else ...recent.map((pkg) {
-          final String slug = pkg['slug']?.toString() ?? '';
-          final String name = pkg['name']?.toString() ?? slug;
-          final String summary = pkg['summary']?.toString() ?? '';
+          div(classes: 'pb-card p-6', [
+            p(classes: 'text-sm text-muted-foreground', [.text('No packages configured yet.')]),
+          ])
+        else
+          ...recent.map((pkg) {
+            final String slug = pkg['slug']?.toString() ?? '';
+            final String name = pkg['name']?.toString() ?? slug;
+            final String summary = pkg['summary']?.toString() ?? '';
 
-          return article(classes: 'pb-card p-6', [
-            p(classes: 'pb-kicker', [.text('PKG')]),
-            h3(classes: 'mt-3 text-xl font-semibold tracking-tight text-card-foreground', [.text(name)]),
-            if (summary.isNotEmpty) p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [.text(summary)]),
-            div(classes: 'mt-5 flex flex-wrap gap-2.5', [
-              if (slug.isNotEmpty) a(href: prefixPath('/packages/$slug'), classes: 'pb-button-primary', [.text('Details')]),
-            ]),
-          ]);
-        })
+            return article(classes: 'pb-card p-6', [
+              p(classes: 'pb-kicker', [.text('PKG')]),
+              h3(classes: 'mt-3 text-xl font-semibold tracking-tight text-card-foreground', [.text(name)]),
+              if (summary.isNotEmpty) p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [.text(summary)]),
+              div(classes: 'mt-5 flex flex-wrap gap-2.5', [
+                if (slug.isNotEmpty)
+                  a(href: prefixPath('/packages/$slug'), classes: 'pb-button-primary', [.text('Details')]),
+              ]),
+            ]);
+          }),
       ]),
     ]);
   }
