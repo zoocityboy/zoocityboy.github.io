@@ -63,10 +63,10 @@ Images / demo
 
 Source code
 
-Sample code and a small repository demonstrating this approach are available on GitHub: https://github.com/zoocityboy/modern_pageable_listview
+Sample code and a small repository demonstrating this approach are available on GitHub: [modern_pageable_listview](https://github.com/zoocityboy/modern_pageable_listview)
 
 Thank you for reading!
 
 If I got something wrong, let me know in the comments — I'd love to improve. Special thanks to Felix Angelov and Rémi Rousselet for their work and inspiration.
 
-Original post: https://zoocityboy.medium.com/modern-pageable-list-view-for-flutter-with-cubit-792d52d4e168
+Original post: [Modern Pageable list view for Flutter with Cubit](https://zoocityboy.medium.com/modern-pageable-list-view-for-flutter-with-cubit-792d52d4e168)

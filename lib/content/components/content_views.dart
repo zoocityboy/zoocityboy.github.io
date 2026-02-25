@@ -11,9 +11,8 @@ Map<String, dynamic> _asStringMap(Object? value) {
   return <String, dynamic>{};
 }
 
-Map<String, dynamic> _pageMeta(Page page) {
-  return _asStringMap(page.data['page']);
-}
+// Note: page meta is provided by `pageMeta(page)` in site_layouts.dart; avoid
+// duplicating that helper here to prevent unused declaration warnings.
 
 List<Map<String, dynamic>> _postItemsFromData(Object? rawPostsData) {
   final Object? source = rawPostsData is Map ? rawPostsData['items'] ?? rawPostsData['posts'] : rawPostsData;
@@ -59,9 +58,6 @@ class SiteFrame extends StatelessComponent {
   final String? subtitle;
   final Component child;
 
-  bool _isActive(String href) {
-    return activePath == href || activePath.startsWith('$href/');
-  }
 
   @override
   Component build(BuildContext context) {

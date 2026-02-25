@@ -29,9 +29,7 @@ Install
 
 Install from the Visual Studio Marketplace or run:
 
-```text
-code --install-extension zoocityboy.nocterm-dev
-```
+`code --install-extension zoocityboy.nocterm-dev`
 
 Usage tips
 
@@ -47,5 +45,5 @@ Why use Nocterm Dev
 
 Links
 
-- Marketplace: https://marketplace.visualstudio.com/items?itemName=zoocityboy.nocterm-dev
+- Marketplace: [Nocterm Dev on Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=zoocityboy.nocterm-dev)
 - Feedback: Use the extension's repository or the Marketplace review page to report issues and suggest features.

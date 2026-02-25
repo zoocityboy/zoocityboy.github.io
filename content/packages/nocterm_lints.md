@@ -12,10 +12,11 @@ layout: package_detail
 type: package
 
 ---
+# Nocterm lints
 
 nocterm_lints captures a set of lint rules and opinionated defaults that fit terminal-first projects, small packages, and CLI utilities. It remixes core Dart lints with practical preferences: strictness where it catches bugs, leniency where readability and ergonomics win for short-lived tools.
 
-Why use nocterm_lints
+## Why use nocterm_lints
 
 - Consistency: Enforce a consistent coding style across small utilities and CLI tools.
 - Safety: Enable rules that catch common mistakes in async code, null-safety usage, and resource handling.

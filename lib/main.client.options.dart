@@ -6,10 +6,10 @@
 
 import 'package:jaspr/client.dart';
 
-import 'package:jaspr_content/components/_internal/code_block_copy_button.dart'
-    deferred as _code_block_copy_button;
 import 'package:jaspr_content/components/theme_toggle.dart'
     deferred as _theme_toggle;
+import 'package:jaspr_content_snippets/internal/client.dart'
+    deferred as _client;
 
 /// Default [ClientOptions] for use with your Jaspr project.
 ///
@@ -29,13 +29,13 @@ import 'package:jaspr_content/components/theme_toggle.dart'
 /// ```
 ClientOptions get defaultClientOptions => ClientOptions(
   clients: {
-    'jaspr_content:code_block_copy_button': ClientLoader(
-      (p) => _code_block_copy_button.CodeBlockCopyButton(),
-      loader: _code_block_copy_button.loadLibrary,
-    ),
     'jaspr_content:theme_toggle': ClientLoader(
       (p) => _theme_toggle.ThemeToggle(),
       loader: _theme_toggle.loadLibrary,
+    ),
+    'jaspr_content_snippets:client': ClientLoader(
+      (p) => _client.CodeBlockCopyButton(),
+      loader: _client.loadLibrary,
     ),
   },
 );
