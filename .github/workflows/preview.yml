@@ -33,7 +33,7 @@ jobs:
         run: |
             jaspr build \
                 --sitemap-domain https://zoocityboy.github.io \
-                --dart-define=BASE_HREF=/pr-preview-action/pr-${{ github.event.number }}/ \
+                --dart-define=BASE_HREF=/pr-preview/pr-${{ github.event.number }}/ \
                 --verbose
           
 
