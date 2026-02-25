@@ -1,11 +1,10 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/jaspr_content.dart';
-import 'package:site/constants.dart';
 import 'package:site/content/components/content_views.dart';
 import 'package:site/content/layouts/site_layouts.dart';
 
-class PostLayout extends PageLayoutBase {
+class PostLayout extends MyBaseLayout {
   const PostLayout();
 
   @override
@@ -15,8 +14,6 @@ class PostLayout extends PageLayoutBase {
   Iterable<Component> buildHead(Page page) sync* {
     yield* super.buildHead(page);
 
-    yield meta(name: 'viewport', content: 'width=device-width, initial-scale=1');
-    yield link(href: 'styles.css', rel: 'stylesheet', id: 'site-styles');
     // Add small script to annotate code blocks with data-lang for label display
     yield script(
       content: r"""
