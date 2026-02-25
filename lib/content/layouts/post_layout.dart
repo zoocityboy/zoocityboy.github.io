@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/jaspr_content.dart';
+import 'package:site/constants.dart';
 import 'package:site/content/components/content_views.dart';
 import 'package:site/content/layouts/site_layouts.dart';
 
@@ -13,11 +14,12 @@ class PostLayout extends PageLayoutBase {
   @override
   Iterable<Component> buildHead(Page page) sync* {
     yield* super.buildHead(page);
+
     yield meta(name: 'viewport', content: 'width=device-width, initial-scale=1');
-    yield link(href: '/styles.css', rel: 'stylesheet', id: 'site-styles');
-      // Add small script to annotate code blocks with data-lang for label display
-      yield script(
-        content: r"""
+    yield link(href: 'styles.css', rel: 'stylesheet', id: 'site-styles');
+    // Add small script to annotate code blocks with data-lang for label display
+    yield script(
+      content: r"""
           (function(){
             function setLangLabels(){
               document.querySelectorAll('.code-block').forEach(function(cb){
@@ -35,10 +37,8 @@ class PostLayout extends PageLayoutBase {
             } else { setLangLabels(); }
           })();
         """,
-      );
-  
+    );
   }
-
 
   @override
   Component buildBody(Page page, Component child) {

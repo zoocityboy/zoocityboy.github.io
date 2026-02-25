@@ -38,15 +38,16 @@ Future<void> main() async {
         FilesystemLoader('content'),
       ],
       configResolver: PageConfig.all(
+        extensions: [
+          HeadingAnchorsExtension(),
+          TableOfContentsExtension(),
+        ],
+        enableFrontmatter: true,
         dataLoaders: [
           FilesystemDataLoader('content/_data'),
         ],
         // Register common content components (CodeBlock enables fenced code highlighting)
         components: [
-          // CodeBlock(
-          //   defaultLanguage: 'dart',
-          //   codeTheme: await HighlighterTheme.loadDarkTheme(),
-          // ),
           BetterCodeBlock(),
           Callout(),
         ],

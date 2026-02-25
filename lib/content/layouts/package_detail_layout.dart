@@ -9,14 +9,14 @@ class PackageDetailLayout extends PageLayoutBase {
 
   @override
   Pattern get name => 'package_detail';
- 
 
   @override
   Iterable<Component> buildHead(Page page) sync* {
     yield* super.buildHead(page);
+    yield const baseHref();
     yield meta(name: 'viewport', content: 'width=device-width, initial-scale=1');
-    yield link(href: '/styles.css', rel: 'stylesheet', id: 'site-styles');
-    
+    yield link(href: 'styles.css', rel: 'stylesheet', id: 'site-styles');
+
     // Add small script to annotate code blocks with data-lang for label display
     yield script(
       content: r"""

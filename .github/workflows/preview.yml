@@ -12,7 +12,7 @@ jobs:
   deploy-preview:
     name: Build and deploy PR preview
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 4
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -31,8 +31,11 @@ jobs:
       - name: Build site
         if: github.event.action != 'closed'
         run: |
-          jaspr build
-          if [ -d build/jaspr ]; then echo "build/jaspr exists"; fi
+            jaspr build \
+                --sitemap-domain https://zoocityboy.github.io \
+                --dart-define=BASE_HREF=/pr-preview-action/pr-${{ github.event.number }} \
+                --verbose
+          
 
       - name: Deploy PR preview
         uses: rossjrw/pr-preview-action@v1

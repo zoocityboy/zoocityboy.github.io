@@ -1,6 +1,7 @@
 # Site Configuration
 titleBase: ZOOCITYBOY
 favicon: favicon.ico
+base: false
 
 # Social media links
 social:

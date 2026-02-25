@@ -9,14 +9,13 @@ class PackagesListLayout extends PageLayoutBase {
 
   @override
   Pattern get name => 'packages_list';
- 
 
   @override
   Iterable<Component> buildHead(Page page) sync* {
     yield* super.buildHead(page);
+    yield const baseHref();
     yield meta(name: 'viewport', content: 'width=device-width, initial-scale=1');
-    yield link(href: '/styles.css', rel: 'stylesheet', id: 'site-styles');
-   
+    yield link(href: 'styles.css', rel: 'stylesheet', id: 'site-styles');
   }
 
   @override
