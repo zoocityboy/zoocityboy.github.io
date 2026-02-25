@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <base href="/"/>
     <meta charset="utf-8"/>
     <title>nocterm_lints | ZOOCITYBOY</title>
     <meta property="og:title" content="nocterm_lints | ZOOCITYBOY"/>
     <link href="favicon.ico" rel="icon" type="image/png"/>
+    <base href="/pr-preview-action/pr-2/"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link id="site-styles" href="/styles.css" rel="stylesheet"/>
+    <link id="site-styles" href="styles.css" rel="stylesheet"/>
     <script>
               (function(){
                 function setLangLabels(){
@@ -40,6 +40,25 @@
                   }
                 
     </script>
+    <style>
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"] {
+        display: flex;
+        align-items: baseline;
+        column-gap: 0.5rem;
+      }
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"] > a {
+        opacity: 0.0;
+        transition: opacity 300ms;
+        font-size: 0.8em;
+        text-decoration: none;
+      }
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"]:hover > a {
+        opacity: 0.8;
+      }
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"] > a:hover {
+        opacity: 1.0;
+      }
+    </style>
     <!--/-->
     <script src="main.client.dart.js" defer></script>
     <style>
@@ -162,11 +181,11 @@
             <article class="border border-border bg-card p-6 md:p-8">
               <div class="prose prose-sm max-w-none text-foreground">
                 <section class="content">
-                  <h1 id="nocterm-lints">Nocterm lints</h1>
+                  <h1 id="nocterm-lints" anchor="true"><span>Nocterm lints</span><a href="/packages/nocterm_lints#nocterm-lints">#</a></h1>
                   <p>
                     nocterm_lints captures a set of lint rules and opinionated defaults that fit terminal-first projects, small packages, and CLI utilities. It remixes core Dart lints with practical preferences: strictness where it catches bugs, leniency where readability and ergonomics win for short-lived tools.
                   </p>
-                  <h2 id="why-use-nocterm_lints">Why use nocterm_lints</h2>
+                  <h2 id="why-use-nocterm_lints" anchor="true"><span>Why use nocterm_lints</span><a href="/packages/nocterm_lints#why-use-nocterm_lints">#</a></h2>
                   <ul>
                     <li>Consistency: Enforce a consistent coding style across small utilities and CLI tools.</li>
                     <li>
@@ -176,7 +195,7 @@
                       Productivity: Turn off or relax rules that tend to be noisy in tiny scripts (for example, overly strict widget naming that doesn't apply to a CLI).
                     </li>
                   </ul>
-                  <h3 id="quick-setup">Quick setup</h3>
+                  <h3 id="quick-setup" anchor="true"><span>Quick setup</span><a href="/packages/nocterm_lints#quick-setup">#</a></h3>
                   <p>Add to your dev_dependencies and include it in analysis_options.yaml:</p>
                   <div class="code-block">
                     <!--@jaspr_content_snippets:client-->
@@ -196,7 +215,7 @@
 
 <span class="property">include</span>: <span class="string">package:nocterm_lints/analysis_options.yaml</span></span></code></pre>
                   </div>
-                  <h3 id="tips">Tips</h3>
+                  <h3 id="tips" anchor="true"><span>Tips</span><a href="/packages/nocterm_lints#tips">#</a></h3>
                   <ul>
                     <li>Start with the recommended profile, then opt into stricter rules as your codebase grows.</li>
                     <li>

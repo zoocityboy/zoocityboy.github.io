@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <base href="/"/>
     <meta charset="utf-8"/>
     <title>nocterm_bloc | ZOOCITYBOY</title>
     <meta property="og:title" content="nocterm_bloc | ZOOCITYBOY"/>
     <link href="favicon.ico" rel="icon" type="image/png"/>
+    <base href="/pr-preview-action/pr-2/"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link id="site-styles" href="/styles.css" rel="stylesheet"/>
+    <link id="site-styles" href="styles.css" rel="stylesheet"/>
     <script>
               (function(){
                 function setLangLabels(){
@@ -40,6 +40,25 @@
                   }
                 
     </script>
+    <style>
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"] {
+        display: flex;
+        align-items: baseline;
+        column-gap: 0.5rem;
+      }
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"] > a {
+        opacity: 0.0;
+        transition: opacity 300ms;
+        font-size: 0.8em;
+        text-decoration: none;
+      }
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"]:hover > a {
+        opacity: 0.8;
+      }
+      :is(h1, h2, h3, h4, h5, h6)[anchor="true"] > a:hover {
+        opacity: 1.0;
+      }
+    </style>
     <!--/-->
     <script src="main.client.dart.js" defer></script>
     <style>
