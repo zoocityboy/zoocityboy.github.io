@@ -138,122 +138,166 @@
       </div>
     </header>
     <!--/@nav_component-->
-    <main class="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8">
-      <section class="grid gap-10 pb-20 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-        <div class="space-y-10 gap-10 pb-20">
-          <pre class="pb-kicker inline-flex items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3.5vw,14px)] leading-tight font-mono"> /$$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$ /$$$$$$$$ /$$     /$$ /$$$$$$$   /$$$$$$  /$$     /$$
+    <main>
+      <section class="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8">
+        <section class="grid gap-10 pb-20 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div class="space-y-10 gap-10 pb-20">
+            <div>
+              <pre class="hidden md:inline-flex pb-kicker items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3vw,12px)] leading-tight font-mono">
+
+ /$$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$ /$$$$$$$$ /$$     /$$ /$$$$$$$   /$$$$$$  /$$     /$$
 |_____ $$  /$$__  $$ /$$__  $$ /$$__  $$|_  $$_/|__  $$__/|  $$   /$$/| $$__  $$ /$$__  $$|  $$   /$$/
      /$$/ | $$  \ $$| $$  \ $$| $$  \__/  | $$     | $$    \  $$ /$$/ | $$  \ $$| $$  \ $$ \  $$ /$$/ 
     /$$/  | $$  | $$| $$  | $$| $$        | $$     | $$     \  $$$$/  | $$$$$$$ | $$  | $$  \  $$$$/  
    /$$/   | $$  | $$| $$  | $$| $$        | $$     | $$      \  $$/   | $$__  $$| $$  | $$   \  $$/   
   /$$/    | $$  | $$| $$  | $$| $$    $$  | $$     | $$       | $$    | $$  \ $$| $$  | $$    | $$    
  /$$$$$$$$|  $$$$$$/|  $$$$$$/|  $$$$$$/ /$$$$$$   | $$       | $$    | $$$$$$$/|  $$$$$$/    | $$    
-|________/ \______/  \______/  \______/ |______/   |__/       |__/    |_______/  \______/     |__/                                                                                                          
+|________/ \______/  \______/  \______/ |______/   |__/       |__/    |_______/  \______/     |__/    
+
+
 </pre>
-          <p class="pb-kicker inline-flex items-center border bg-secondary px-3 py-1">Context for user</p>
-          <p class="max-w-[56ch] text-sm leading-7 text-muted-foreground md:text-base">
-            Zoocityboy is a software developer and open source enthusiast who loves building tools that empower other developers. This site is a collection of his work, including packages, blog posts, and projects.
-          </p>
-        </div>
-      </section>
-      <section id="directory" class="space-y-8 pb-20">
-        <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">What's in the directory</h2>
-        <div class="grid gap-3 md:grid-cols-3">
-          <article class="pb-card p-6">
-            <p class="pb-kicker">01</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">Agent skills</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Reusable instructions that teach your agent how to do things with consistent behavior across tasks.</p>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">02</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">Skill bundles</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Install grouped skills for frameworks or workflows instead of wiring each instruction one by one.</p>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">03</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">MCP servers</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Tooling-specific MCP configurations and docs that are ready to paste into your client setup.</p>
-          </article>
-        </div>
-      </section>
-      <section class="space-y-8 pb-20">
-        <div class="flex items-center justify-between">
-          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Recent posts</h2>
-          <a class="text-sm font-semibold transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts">All</a>
-        </div>
-        <div class="grid gap-3 md:grid-cols-3"><div class="pb-card p-6"><p class="text-sm text-muted-foreground">No posts yet.</p></div></div>
-      </section>
-      <section class="space-y-8 pb-20">
-        <div class="flex items-center justify-between">
-          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Recent packages</h2>
-          <a class="text-sm font-semibold transition-colors hover:text-foreground" href="/pr-preview/pr-2/packages">All</a>
-        </div>
-        <div class="grid gap-3 md:grid-cols-3">
-          <article class="pb-card p-6">
-            <p class="pb-kicker">PKG</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">nocterm_bloc</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Pragmatic Bloc helpers and small utilities for terminal-first or minimal UI Dart projects.</p>
-            <div class="mt-5 flex flex-wrap gap-2.5"><a class="pb-button-primary" href="/pr-preview/pr-2/packages/nocterm_bloc">Details</a></div>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">PKG</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">nocterm_lints</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Opinionated lint rules for small, terminal-centric Dart projects and libraries.</p>
-            <div class="mt-5 flex flex-wrap gap-2.5"><a class="pb-button-primary" href="/pr-preview/pr-2/packages/nocterm_lints">Details</a></div>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">PKG</p>
-            <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">nocterm_dev</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">
-              A terminal-first Visual Studio Code extension that surfaces quick terminal commands, snippets, and focused keybindings for developer workflows.
+              <pre class="md:hidden pb-kicker items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3vw,12px)] leading-tight font-mono">
+
+ /$$$$$$$$  /$$$$$$   /$$$$$$ 
+|_____ $$  /$$__  $$ /$$__  $$
+     /$$/ | $$  \ $$| $$  \ $$
+    /$$/  | $$  | $$| $$  | $$
+   /$$/   | $$  | $$| $$  | $$
+  /$$/    | $$  | $$| $$  | $$
+ /$$$$$$$$|  $$$$$$/|  $$$$$$/
+|________/ \______/  \______/ 
+  /$$$$$$  /$$$$$$ /$$$$$$$$ /$$     /$$
+ /$$__  $$|_  $$_/|__  $$__/|  $$   /$$/
+| $$  \__/  | $$     | $$    \  $$ /$$/ 
+| $$        | $$     | $$     \  $$$$/  
+| $$        | $$     | $$      \  $$/   
+| $$    $$  | $$     | $$       | $$    
+|  $$$$$$/ /$$$$$$   | $$       | $$    
+ \______/ |______/   |__/       |__/    
+ /$$$$$$$   /$$$$$$  /$$     /$$ 
+| $$__  $$ /$$__  $$|  $$   /$$/ 
+| $$  \ $$| $$  \ $$ \  $$ /$$/   
+| $$$$$$$ | $$  | $$  \  $$$$/  
+| $$__  $$| $$  | $$   \  $$/   
+| $$  \ $$| $$  | $$    | $$    
+| $$$$$$$/|  $$$$$$/    | $$    
+|_______/  \______/     |__/
+</pre>
+            </div>
+            <h1 class="max-w-[18ch] text-4xl font-semibold leading-tight tracking-tighter md:text-6xl">
+              Dart developer*<br/><span class="text-2xl md:text-4xl text-muted-foreground">Flutter, Jaspr, Nocterm.</span>
+            </h1>
+            <p class="pb-kicker inline-flex items-center border bg-secondary px-3 py-1">Context for user</p>
+            <p class="max-w-[56ch] text-sm leading-7 text-muted-foreground md:text-base">
+              Zoocityboy is a software developer and open source enthusiast who loves building tools that empower other developers. This site is a collection of his work, including packages, blog posts, and projects.
             </p>
-            <div class="mt-5 flex flex-wrap gap-2.5"><a class="pb-button-primary" href="/pr-preview/pr-2/packages/nocterm_dev">Details</a></div>
-          </article>
-        </div>
-      </section>
-      <section id="faq" class="space-y-8 pb-20">
-        <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Common questions</h2>
-        <div class="grid gap-3 md:grid-cols-2">
-          <article class="pb-card p-6">
-            <p class="pb-kicker">01</p>
-            <h3 class="mt-3 text-lg font-semibold text-card-foreground">What's a skill exactly?</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">A reusable instruction set that your coding agent can follow each time for predictable output.</p>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">02</p>
-            <h3 class="mt-3 text-lg font-semibold text-card-foreground">What tools does this work with?</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Most AI coding tools that support skills and MCP-based context sources can use this setup.</p>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">03</p>
-            <h3 class="mt-3 text-lg font-semibold text-card-foreground">Is this free?</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">
-              The directory model is free to browse and copy from, making adoption easy for solo and team workflows.
-            </p>
-          </article>
-          <article class="pb-card p-6">
-            <p class="pb-kicker">04</p>
-            <h3 class="mt-3 text-lg font-semibold text-card-foreground">Where do I put the files?</h3>
-            <p class="mt-3 text-sm leading-6 text-muted-foreground">Install skills in your tool-specific folder locally per project or globally in your home directory.</p>
-          </article>
-        </div>
-      </section>
-      <section class="pb-card px-6 py-10 md:px-8">
-        <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-          <div class="space-y-2">
-            <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">Give your agent better context.</h2>
-            <p class="text-sm text-muted-foreground md:text-base">Get better code and fewer hallucinations with a reusable skill-first setup.</p>
           </div>
-          <div class="flex flex-wrap gap-3">
-            <a class="pb-button-primary" href="#directory">Browse skills</a>
-            <a class="pb-button-secondary" href="#faq">Browse MCP servers</a>
-          </div>
-        </div>
+        </section>
       </section>
+      <div class="container mx-auto max-w-5xl px-4 py-8 overflow-x-hidden flex-1">
+        <section id="directory" class="space-y-8 pb-20">
+          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">What's in the directory</h2>
+          <div class="grid gap-3 md:grid-cols-3">
+            <article class="pb-card p-6">
+              <p class="pb-kicker">01</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">Agent skills</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Reusable instructions that teach your agent how to do things with consistent behavior across tasks.</p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">02</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">Skill bundles</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Install grouped skills for frameworks or workflows instead of wiring each instruction one by one.</p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">03</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">MCP servers</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Tooling-specific MCP configurations and docs that are ready to paste into your client setup.</p>
+            </article>
+          </div>
+        </section>
+        <div class="text-muted-foreground/30 font-mono text-sm select-none space-y-8 pb-6" aria-hidden="true">//</div>
+        <section class="space-y-8 pb-20">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Recent posts</h2>
+            <a class="text-sm font-semibold transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts">All</a>
+          </div>
+          <div class="grid gap-3 md:grid-cols-3"><div class="pb-card p-6"><p class="text-sm text-muted-foreground">No posts yet.</p></div></div>
+        </section>
+        <div class="text-muted-foreground/30 font-mono text-sm select-none space-y-8 pb-6" aria-hidden="true">//</div>
+        <section class="space-y-8 pb-20">
+          <div class="flex items-center justify-between">
+            <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Recent packages</h2>
+            <a class="text-sm font-semibold transition-colors hover:text-foreground" href="/pr-preview/pr-2/packages">All</a>
+          </div>
+          <div class="grid gap-3 md:grid-cols-3">
+            <article class="pb-card p-6">
+              <p class="pb-kicker">PKG</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">nocterm_bloc</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Pragmatic Bloc helpers and small utilities for terminal-first or minimal UI Dart projects.</p>
+              <div class="mt-5 flex flex-wrap gap-2.5"><a class="pb-button-primary" href="/pr-preview/pr-2/packages/nocterm_bloc">Details</a></div>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">PKG</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">nocterm_lints</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Opinionated lint rules for small, terminal-centric Dart projects and libraries.</p>
+              <div class="mt-5 flex flex-wrap gap-2.5"><a class="pb-button-primary" href="/pr-preview/pr-2/packages/nocterm_lints">Details</a></div>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">PKG</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">nocterm_dev</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">
+                A terminal-first Visual Studio Code extension that surfaces quick terminal commands, snippets, and focused keybindings for developer workflows.
+              </p>
+              <div class="mt-5 flex flex-wrap gap-2.5"><a class="pb-button-primary" href="/pr-preview/pr-2/packages/nocterm_dev">Details</a></div>
+            </article>
+          </div>
+        </section>
+        <div class="text-muted-foreground/30 font-mono text-sm select-none space-y-8 pb-6" aria-hidden="true">//</div>
+        <section id="faq" class="space-y-8 pb-20">
+          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Common questions</h2>
+          <div class="grid gap-3 md:grid-cols-2">
+            <article class="pb-card p-6">
+              <p class="pb-kicker">01</p>
+              <h3 class="mt-3 text-lg font-semibold text-card-foreground">What's a skill exactly?</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">A reusable instruction set that your coding agent can follow each time for predictable output.</p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">02</p>
+              <h3 class="mt-3 text-lg font-semibold text-card-foreground">What tools does this work with?</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Most AI coding tools that support skills and MCP-based context sources can use this setup.</p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">03</p>
+              <h3 class="mt-3 text-lg font-semibold text-card-foreground">Is this free?</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">
+                The directory model is free to browse and copy from, making adoption easy for solo and team workflows.
+              </p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">04</p>
+              <h3 class="mt-3 text-lg font-semibold text-card-foreground">Where do I put the files?</h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Install skills in your tool-specific folder locally per project or globally in your home directory.</p>
+            </article>
+          </div>
+        </section>
+        <div class="text-muted-foreground/30 font-mono text-sm select-none space-y-8 pb-6" aria-hidden="true">//</div>
+        <section class="pb-card px-6 py-10 md:px-8">
+          <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <div class="space-y-2">
+              <h2 class="text-2xl font-semibold tracking-tight md:text-3xl">Give your agent better context.</h2>
+              <p class="text-sm text-muted-foreground md:text-base">Get better code and fewer hallucinations with a reusable skill-first setup.</p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+              <a class="pb-button-primary" href="#directory">Browse skills</a>
+              <a class="pb-button-secondary" href="#faq">Browse MCP servers</a>
+            </div>
+          </div>
+        </section>
+      </div>
     </main>
     <footer class="border-t border-border bg-background">
       <div class="mx-auto flex w-full max-w-5xl flex-col gap-4 px-6 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-8">
-        <p>zoocityboy</p>
+        <p>created by zoocityboy</p>
         <div class="flex flex-wrap gap-4">
           <a class="transition-colors hover:text-foreground" href="/pr-preview/pr-2/">Home</a>
           <a class="transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts">Blog</a>

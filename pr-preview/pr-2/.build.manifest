@@ -280,7 +280,7 @@ packages/lints/core.yaml
 packages/lints/recommended.yaml
 packages/site/clients.bundle.json
 packages/site/components/clicker.client.module.json
-packages/site/content/nav_component.client.module.json
+packages/site/content/components/nav_component.client.module.json
 packages/timezone/data/latest.tzf
 packages/timezone/data/latest_10y.tzf
 packages/timezone/data/latest_all.tzf
