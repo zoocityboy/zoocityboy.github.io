@@ -19,7 +19,7 @@ Map<String, dynamic> pageMeta(Page page) {
 
 // `BASE_HREF` should be provided at compile time with `--dart-define=BASE_HREF=/docs/`
 // Fallback is `/` (root).
-const String baseHrefValue = String.fromEnvironment('BASE_HREF', defaultValue: '/');
+const String baseHrefValue = String.fromEnvironment('BASE_HREF', defaultValue: '');
 
 /// Prefix a path with the configured `BASE_HREF`.
 ///
@@ -42,6 +42,7 @@ final class baseHref extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
+    if (baseHrefValue.isEmpty) return const Component.empty();
     return Component.element(
       tag: 'base',
       attributes: {'href': baseHrefValue},

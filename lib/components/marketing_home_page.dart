@@ -19,7 +19,8 @@ class MarketingHomePage extends StatelessComponent {
     return Component.fragment([
       const NavComponent(),
       main_(classes: 'mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8', [
-        const HeroComponent(),
+        HeroBanner(),
+        // const HeroComponent(),
         const DirectoryComponent(),
         const RecentPostsSection(),
         const RecentPackagesSection(),
@@ -29,5 +30,4 @@ class MarketingHomePage extends StatelessComponent {
       const FooterComponent(),
     ]);
   }
-
 }

@@ -8,6 +8,7 @@ import 'package:jaspr/server.dart';
 import 'package:jaspr_content/components/callout.dart' as _callout;
 import 'package:jaspr_content/components/theme_toggle.dart' as _theme_toggle;
 import 'package:jaspr_content_snippets/internal/client.dart' as _client;
+import 'package:site/content/nav_component.dart' as _nav_component;
 
 /// Default [ServerOptions] for use with your Jaspr project.
 ///
@@ -33,6 +34,9 @@ ServerOptions get defaultServerOptions => ServerOptions(
     ),
     _client.CodeBlockCopyButton: ClientTarget<_client.CodeBlockCopyButton>(
       'jaspr_content_snippets:client',
+    ),
+    _nav_component.NavComponent: ClientTarget<_nav_component.NavComponent>(
+      'nav_component',
     ),
   },
   styles: () => [

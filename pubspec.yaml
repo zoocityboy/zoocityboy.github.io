@@ -24,3 +24,5 @@ dependency_overrides:
 
 jaspr:
   mode: static
+  port: 8080
+  flutter: plugins

@@ -10,6 +10,7 @@ import 'package:jaspr_content/components/theme_toggle.dart'
     deferred as _theme_toggle;
 import 'package:jaspr_content_snippets/internal/client.dart'
     deferred as _client;
+import 'package:site/content/nav_component.dart' deferred as _nav_component;
 
 /// Default [ClientOptions] for use with your Jaspr project.
 ///
@@ -36,6 +37,10 @@ ClientOptions get defaultClientOptions => ClientOptions(
     'jaspr_content_snippets:client': ClientLoader(
       (p) => _client.CodeBlockCopyButton(),
       loader: _client.loadLibrary,
+    ),
+    'nav_component': ClientLoader(
+      (p) => _nav_component.NavComponent(),
+      loader: _nav_component.loadLibrary,
     ),
   },
 );

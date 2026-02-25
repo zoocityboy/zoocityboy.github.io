@@ -3,14 +3,28 @@ import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/components/theme_toggle.dart';
 import 'layouts/site_layouts.dart';
 
-class NavComponent extends StatelessComponent {
+@client
+class NavComponent extends StatefulComponent {
   const NavComponent({super.key});
 
+  @override
+  State createState() => _NavComponentState();
+}
+
+class _NavComponentState extends State<NavComponent> {
+  bool _open = false;
 
   bool _isActive(BuildContext context, String href) {
     final ph = prefixPath(href);
     return context.url == ph || context.url.startsWith('$ph/');
   }
+
+  void _toggle() {
+    print('Toggling menu: currently ${_open ? 'open' : 'closed'}');
+    setState(() => _open = !_open);
+  }
+
+  void _close() => setState(() => _open = false);
 
   @override
   Component build(BuildContext context) {
@@ -18,15 +32,22 @@ class NavComponent extends StatelessComponent {
       return '$base ${_isActive(context, href) ? 'text-foreground' : 'text-muted-foreground'}';
     }
 
+    final mobileMenuBase = 'md:hidden border-t border-border bg-background';
+    final mobileMenuClasses = _open ? '$mobileMenuBase block' : '$mobileMenuBase hidden';
+
     return header(
       classes: 'border-b border-border bg-background',
       [
+        // Main header row
         div(classes: 'mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 md:px-8', [
+          // Brand
           a(
             href: prefixPath('/'),
             classes: linkClass('/', 'text-sm font-semibold tracking-tight'),
             [.text('zoocityboy')],
           ),
+
+          // Desktop nav
           nav(
             classes: 'hidden items-center gap-5 text-xs font-semibold uppercase tracking-[0.12em] md:flex',
             [
@@ -40,6 +61,56 @@ class NavComponent extends StatelessComponent {
               ThemeToggle(),
             ],
           ),
+
+          // Mobile controls
+          div(classes: 'flex items-center gap-2 md:hidden', [
+            ThemeToggle(),
+            button(
+              attributes: {'aria-expanded': _open ? 'true' : 'false', 'aria-label': 'Toggle menu'},
+              classes: 'inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card p-1',
+              events: {'click': (_) => _toggle()},
+              [
+                // Simple hamburger / X icon using spans
+                if (!_open)
+                  div(classes: 'space-y-1', [
+                    span(classes: 'block h-0.5 w-5 bg-foreground', []),
+                    span(classes: 'block h-0.5 w-5 bg-foreground', []),
+                    span(classes: 'block h-0.5 w-5 bg-foreground', []),
+                  ])
+                else
+                  div(classes: 'leading-none', [
+                    span(classes: 'block h-0.5 w-5 rotate-45 origin-center bg-foreground', []),
+                    span(classes: 'block h-0.5 w-5 -rotate-45 -mt-0.5 origin-center bg-foreground', []),
+                  ]),
+              ],
+            ),
+          ]),
+        ]),
+
+        // Mobile menu: always render but animate open/close using max-height and opacity.
+        div(classes: mobileMenuClasses, [
+          div(classes: 'mx-auto max-w-5xl px-6 py-4', [
+            nav(classes: 'flex flex-col gap-3 text-sm font-semibold uppercase', [
+              a(
+                href: prefixPath('/posts'),
+                classes: '${linkClass('/posts')} py-2',
+                events: {'click': (_) => _close()},
+                [.text('Posts')],
+              ),
+              a(
+                href: prefixPath('/packages'),
+                classes: '${linkClass('/packages')} py-2',
+                events: {'click': (_) => _close()},
+                [.text('Packages')],
+              ),
+              a(
+                href: 'https://github.com/zoocityboy',
+                classes: 'py-2',
+                events: {'click': (_) => _close()},
+                [.text('GitHub')],
+              ),
+            ]),
+          ]),
         ]),
       ],
     );
