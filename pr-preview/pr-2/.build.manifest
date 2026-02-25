@@ -1,10 +1,6 @@
 .dart_tool/package_config.json
 favicon.ico
 images/logo.svg
-main.client.dart.js
-main.client.dart.js_1.part.js
-main.client.dart.js_2.part.js
-main.client.dart.js_3.part.js
 packages/$sdk/dev_compiler/amd/require.js
 packages/$sdk/dev_compiler/ddc/ddc_module_loader.js
 packages/$sdk/dev_compiler/web/dart_stack_trace_mapper.js
@@ -284,6 +280,7 @@ packages/lints/core.yaml
 packages/lints/recommended.yaml
 packages/site/clients.bundle.json
 packages/site/components/clicker.client.module.json
+packages/site/content/nav_component.client.module.json
 packages/timezone/data/latest.tzf
 packages/timezone/data/latest_10y.tzf
 packages/timezone/data/latest_all.tzf
