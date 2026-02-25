@@ -1,8 +1,9 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/jaspr_content.dart';
-import 'package:site/content/footer_component.dart';
-import 'package:site/content/nav_component.dart';
+import 'package:site/content/components/footer_component.dart';
+import 'package:site/content/components/nav_breadcrumbs.dart';
+import 'package:site/content/components/nav_component.dart';
 import '../layouts/site_layouts.dart';
 
 Map<String, dynamic> _asStringMap(Object? value) {
@@ -62,31 +63,11 @@ class SiteFrame extends StatelessComponent {
 
   @override
   Component build(BuildContext context) {
-    return div(classes: 'site-frame', [
+    return Component.fragment([
       NavComponent(),
       main_(classes: 'mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8', [
         if (title != null) ...[
-          // Breadcrumbs
-          nav(classes: 'text-sm text-muted-foreground py-2', [
-            a(href: prefixPath('/'), classes: 'transition-colors hover:text-primary', [.text('Home')]),
-            span(classes: 'px-2', [.text('/')]),
-            // section link based on activePath
-            a(
-              href: prefixPath(activePath),
-              classes: 'transition-colors hover:text-primary',
-              [
-                .text(
-                  activePath == '/posts'
-                      ? 'Blog'
-                      : (activePath == '/packages' ? 'Packages' : activePath.replaceAll('/', '')),
-                ),
-              ],
-            ),
-            if (title != null) ...[
-              span(classes: 'px-2', [.text('/')]),
-              span(classes: 'font-medium text-foreground', [.text(title!)]),
-            ],
-          ]),
+          NavBreadcrumbs(activePath: activePath, title: title),
           h1(classes: 'text-4xl font-semibold tracking-tighter md:text-5xl', [.text(title!)]),
           if (subtitle != null) ...[
             p(classes: 'mt-4 max-w-[64ch] text-sm leading-7 text-muted-foreground md:text-base', [
@@ -132,7 +113,7 @@ class BlogPostListView extends StatelessComponent {
 
         final String urlPref = url.startsWith('/') ? prefixPath(url) : url;
 
-        return article(classes: 'border border-border bg-card p-6', [
+        return article(classes: 'py-6', [
           p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [.text(date)]),
           h2(classes: 'mt-3 text-2xl font-semibold tracking-tight text-card-foreground', [
             a(href: urlPref, classes: 'transition-colors hover:text-primary', [.text(title)]),
@@ -230,7 +211,7 @@ class PackageDetailView extends StatelessComponent {
     final String repository = package['repository']?.toString() ?? '';
 
     return div(classes: 'grid gap-3', [
-      section(classes: 'border border-border bg-card p-6', [
+      section(classes: '', [
         h2(classes: 'text-3xl font-semibold tracking-tight', [.text(name)]),
         if (summary.isNotEmpty) ...[
           p(classes: 'mt-3 text-sm leading-7 text-muted-foreground md:text-base', [.text(summary)]),
@@ -254,15 +235,15 @@ class PackageDetailView extends StatelessComponent {
           ],
         ]),
       ]),
-      section(classes: 'border border-border bg-card p-6', [
+      section(classes: '', [
         h3(classes: 'text-lg font-semibold tracking-tight text-card-foreground', [.text('Install')]),
         // Use same markdown code-block styling and language class so Prism and our .code-block styles apply
         div(classes: 'mt-3', [
-          div(classes: 'code-block', [
+          
             pre(classes: 'border border-border bg-muted p-4 text-sm overflow-x-auto', [
               code(classes: 'language-dart', [.text('dart pub add $name')]),
             ]),
-          ]),
+          
         ]),
       ]),
     ]);
@@ -296,14 +277,14 @@ class PostDetailView extends StatelessComponent {
     final String content = post['content']?.toString() ?? '';
     final String date = post['date']?.toString() ?? '';
 
-    return article(classes: 'border border-border bg-card p-6 md:p-8', [
+    return article(classes: 'bg-card p-6 md:p-8', [
       if (date.isNotEmpty) ...[
         p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
           .text(date),
         ]),
         div(classes: 'mt-4 border-t border-border', []),
       ],
-      h1(classes: 'mt-6 text-3xl font-semibold tracking-tight', [.text(title)]),
+      h1(classes: 'mt-6 text-3xl font-semibold tracking-tight py-6', [.text(title)]),
       if (content.isNotEmpty) ...[
         div(classes: 'prose prose-sm mt-6 max-w-none text-foreground', [
           // Convert markdown content to HTML - for now just use raw text

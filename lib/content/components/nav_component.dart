@@ -1,7 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/components/theme_toggle.dart';
-import 'layouts/site_layouts.dart';
+import '../layouts/site_layouts.dart';
 
 @client
 class NavComponent extends StatefulComponent {

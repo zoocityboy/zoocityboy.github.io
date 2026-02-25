@@ -48,7 +48,7 @@ class PostLayout extends MyBaseLayout {
       subtitle: meta['description']?.toString(),
       child: slug.isNotEmpty
           ? PostDetailView(slug: slug)
-          : article(classes: 'border border-border bg-card p-6 md:p-8', [
+          : article(classes: 'bg-card p-6 md:p-8', [
               if (meta['date'] != null) ...[
                 p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
                   .text(meta['date'].toString()),

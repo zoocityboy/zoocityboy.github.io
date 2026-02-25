@@ -10,7 +10,8 @@ import 'package:jaspr_content/components/theme_toggle.dart'
     deferred as _theme_toggle;
 import 'package:jaspr_content_snippets/internal/client.dart'
     deferred as _client;
-import 'package:site/content/nav_component.dart' deferred as _nav_component;
+import 'package:site/content/components/nav_component.dart'
+    deferred as _nav_component;
 
 /// Default [ClientOptions] for use with your Jaspr project.
 ///
