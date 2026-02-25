@@ -1,6 +1,6 @@
 // ignore_for_file: camel_case_types
 
-import 'dart:io';
+// Do not import `dart:io` here: web builds don't support it.
 
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
@@ -17,8 +17,25 @@ Map<String, dynamic> pageMeta(Page page) {
   return asStringMap(page.data['page']);
 }
 
-final String baseHrefValue =
-    Platform.environment['BASE_HREF'] ?? String.fromEnvironment('BASE_HREF', defaultValue: '/');
+// `BASE_HREF` should be provided at compile time with `--dart-define=BASE_HREF=/docs/`
+// Fallback is `/` (root).
+const String baseHrefValue = String.fromEnvironment('BASE_HREF', defaultValue: '/');
+
+/// Prefix a path with the configured `BASE_HREF`.
+///
+/// Examples:
+/// - `prefixPath('/')` -> `/docs/`
+/// - `prefixPath('/posts')` -> `/docs/posts`
+String prefixPath(String path) {
+  // Only prefix paths that begin with a leading slash. Leave external URLs
+  // and fragment/relative paths untouched.
+  if (!path.startsWith('/')) return path;
+  final base = baseHrefValue;
+  if (base == '/' || base.isEmpty) return path;
+  final p = path == '/' ? '' : path.substring(1);
+  if (base.endsWith('/')) return '$base$p';
+  return '$base/$p';
+}
 
 final class baseHref extends StatelessComponent {
   const baseHref({super.key});
@@ -40,6 +57,6 @@ abstract class MyBaseLayout extends PageLayoutBase {
     yield* super.buildHead(page);
     yield const baseHref();
     yield meta(name: 'viewport', content: 'width=device-width, initial-scale=1');
-    yield link(href: '/styles.css', rel: 'stylesheet', id: 'site-styles');
+    yield link(href: prefixPath('/styles.css'), rel: 'stylesheet', id: 'site-styles');
   }
 }

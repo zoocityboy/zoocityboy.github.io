@@ -1,5 +1,6 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
+import 'layouts/site_layouts.dart';
 
 class FooterComponent extends StatelessComponent {
   const FooterComponent({super.key});
@@ -13,9 +14,9 @@ class FooterComponent extends StatelessComponent {
         [
           p([.text('zoocityboy')]),
           div(classes: 'flex flex-wrap gap-4', [
-            a(href: '/', classes: 'transition-colors hover:text-foreground', [.text('Home')]),
-            a(href: '/blog', classes: 'transition-colors hover:text-foreground', [.text('Blog')]),
-            a(href: '/packages', classes: 'transition-colors hover:text-foreground', [.text('Packages')]),
+            a(href: prefixPath('/'), classes: 'transition-colors hover:text-foreground', [.text('Home')]),
+            a(href: prefixPath('/posts'), classes: 'transition-colors hover:text-foreground', [.text('Blog')]),
+            a(href: prefixPath('/packages'), classes: 'transition-colors hover:text-foreground', [.text('Packages')]),
           ]),
         ],
       ),

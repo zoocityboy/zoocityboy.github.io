@@ -35,7 +35,7 @@ jobs:
                 --sitemap-domain https://zoocityboy.github.io \
                 --dart-define=BASE_HREF=/pr-preview/pr-${{ github.event.number }}/ \
                 --verbose
-          
+            if [ -d build/jaspr ]; then echo "build/jaspr exists"; fi
 
       - name: Deploy PR preview
         uses: rossjrw/pr-preview-action@v1

@@ -3,6 +3,7 @@ import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/jaspr_content.dart';
 import 'package:site/content/footer_component.dart';
 import 'package:site/content/nav_component.dart';
+import '../layouts/site_layouts.dart';
 
 Map<String, dynamic> _asStringMap(Object? value) {
   if (value is Map) {
@@ -67,11 +68,11 @@ class SiteFrame extends StatelessComponent {
         if (title != null) ...[
           // Breadcrumbs
           nav(classes: 'text-sm text-muted-foreground py-2', [
-            a(href: '/', classes: 'transition-colors hover:text-primary', [.text('Home')]),
+            a(href: prefixPath('/'), classes: 'transition-colors hover:text-primary', [.text('Home')]),
             span(classes: 'px-2', [.text('/')]),
             // section link based on activePath
             a(
-              href: activePath,
+              href: prefixPath(activePath),
               classes: 'transition-colors hover:text-primary',
               [
                 .text(
@@ -129,16 +130,18 @@ class BlogPostListView extends StatelessComponent {
         final String date = post['date']?.toString() ?? '';
         final String url = post['url']?.toString() ?? (slug.isNotEmpty ? '/posts/$slug' : '#');
 
+        final String urlPref = url.startsWith('/') ? prefixPath(url) : url;
+
         return article(classes: 'border border-border bg-card p-6', [
           p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [.text(date)]),
           h2(classes: 'mt-3 text-2xl font-semibold tracking-tight text-card-foreground', [
-            a(href: url, classes: 'transition-colors hover:text-primary', [.text(title)]),
+            a(href: urlPref, classes: 'transition-colors hover:text-primary', [.text(title)]),
           ]),
           if (description.isNotEmpty) ...[
             p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [.text(description)]),
           ],
           a(
-            href: url,
+            href: urlPref,
             classes:
                 'mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent',
             [.text('Read post')],
@@ -177,7 +180,7 @@ class PackagesListView extends StatelessComponent {
           div(classes: 'mt-5 flex flex-wrap gap-2.5', [
             if (slug.isNotEmpty) ...[
               a(
-                href: '/packages/$slug',
+                href: prefixPath('/packages/$slug'),
                 classes:
                     'inline-flex items-center bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-90',
                 [.text('Details')],

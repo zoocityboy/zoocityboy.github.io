@@ -1,13 +1,15 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/components/theme_toggle.dart';
+import 'layouts/site_layouts.dart';
 
 class NavComponent extends StatelessComponent {
   const NavComponent({super.key});
 
 
   bool _isActive(BuildContext context, String href) {
-    return context.url == href || context.url.startsWith('$href/');
+    final ph = prefixPath(href);
+    return context.url == ph || context.url.startsWith('$ph/');
   }
 
   @override
@@ -21,15 +23,15 @@ class NavComponent extends StatelessComponent {
       [
         div(classes: 'mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 md:px-8', [
           a(
-            href: '/',
+            href: prefixPath('/'),
             classes: linkClass('/', 'text-sm font-semibold tracking-tight'),
             [.text('zoocityboy')],
           ),
           nav(
             classes: 'hidden items-center gap-5 text-xs font-semibold uppercase tracking-[0.12em] md:flex',
             [
-              a(href: '/posts', classes: linkClass('/posts'), [.text('Posts')]),
-              a(href: '/packages', classes: linkClass('/packages'), [.text('Packages')]),
+              a(href: prefixPath('/posts'), classes: linkClass('/posts'), [.text('Posts')]),
+              a(href: prefixPath('/packages'), classes: linkClass('/packages'), [.text('Packages')]),
               a(
                 href: 'https://github.com/zoocityboy',
                 classes: 'pb-button-secondary px-4 py-2',
