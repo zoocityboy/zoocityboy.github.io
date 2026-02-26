@@ -7,16 +7,15 @@ on:
 concurrency:
   group: preview-${{ github.ref }}
   cancel-in-progress: true
-
+permissions:
+      contents: write
+      pages: write
+      id-token: write
 jobs:
   deploy-preview:
     name: Build and deploy PR preview
     runs-on: ubuntu-latest
     timeout-minutes: 4
-    permissions:
-      contents: write
-      pages: write
-      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -55,6 +54,6 @@ jobs:
           umbrella-dir: pr-preview
           action: auto
           comment: true
-          qr-code: true
+          qr-code: false
 
     
