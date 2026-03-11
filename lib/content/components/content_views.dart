@@ -60,7 +60,6 @@ class SiteFrame extends StatelessComponent {
   final String? subtitle;
   final Component child;
 
-
   @override
   Component build(BuildContext context) {
     return Component.fragment([
@@ -97,38 +96,123 @@ class BlogPostListView extends StatelessComponent {
       ]);
     }
 
-    yamlPosts.sort((a, b) {
-      final DateTime dateA = DateTime.tryParse(a['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
-      final DateTime dateB = DateTime.tryParse(b['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+    yamlPosts.sort((firstPost, secondPost) {
+      final DateTime dateA =
+          DateTime.tryParse(firstPost['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
+      final DateTime dateB =
+          DateTime.tryParse(secondPost['date']?.toString() ?? '') ?? DateTime.fromMillisecondsSinceEpoch(0);
       return dateB.compareTo(dateA);
     });
 
-    return div(classes: 'grid gap-3', [
-      ...yamlPosts.map((Map<String, dynamic> post) {
-        final String slug = post['slug']?.toString() ?? '';
-        final String title = post['name']?.toString() ?? post['title']?.toString() ?? slug;
-        final String description = post['summary']?.toString() ?? post['description']?.toString() ?? '';
-        final String date = post['date']?.toString() ?? '';
-        final String url = post['url']?.toString() ?? (slug.isNotEmpty ? '/posts/$slug' : '#');
+    const int postsPerPage = 2;
 
-        final String urlPref = url.startsWith('/') ? prefixPath(url) : url;
+    return div(classes: 'space-y-6', [
+      div(id: 'posts-pagination', classes: 'grid gap-3', [
+        ...yamlPosts.asMap().entries.map((MapEntry<int, Map<String, dynamic>> entry) {
+          final int idx = entry.key;
+          final Map<String, dynamic> post = entry.value;
+          final String slug = post['slug']?.toString() ?? '';
+          final String title = post['name']?.toString() ?? post['title']?.toString() ?? slug;
+          final String description = post['summary']?.toString() ?? post['description']?.toString() ?? '';
+          final String date = post['date']?.toString() ?? '';
+          final String url = post['url']?.toString() ?? (slug.isNotEmpty ? '/posts/$slug' : '#');
 
-        return article(classes: 'py-6', [
-          p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [.text(date)]),
-          h2(classes: 'mt-3 text-2xl font-semibold tracking-tight text-card-foreground', [
-            a(href: urlPref, classes: 'transition-colors hover:text-primary', [.text(title)]),
-          ]),
-          if (description.isNotEmpty) ...[
-            p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [.text(description)]),
-          ],
-          a(
-            href: urlPref,
-            classes:
-                'mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent',
-            [.text('Read post')],
-          ),
-        ]);
-      }),
+          final String urlPref = url.startsWith('/') ? prefixPath(url) : url;
+
+          final int pageNum = (idx ~/ postsPerPage) + 1;
+
+          return article(
+            id: 'post-$idx',
+            classes: 'post-item py-6',
+            attributes: {'data-page': pageNum.toString()},
+            [
+              p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [.text(date)]),
+              h2(classes: 'mt-3 text-2xl font-semibold tracking-tight text-card-foreground', [
+                a(href: urlPref, classes: 'transition-colors hover:text-primary', [.text(title)]),
+              ]),
+              if (description.isNotEmpty) ...[
+                p(classes: 'mt-3 text-sm leading-6 text-muted-foreground', [.text(description)]),
+              ],
+              a(
+                href: urlPref,
+                classes:
+                    'mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent',
+                [.text('Read post')],
+              ),
+            ],
+          );
+        }),
+      ]),
+
+      // Pagination controls (will be wired up by client-side JS)
+      nav(classes: 'flex items-center justify-center space-x-3', [
+        div(id: 'posts-pager', classes: 'inline-flex items-center space-x-2', []),
+      ]),
+
+      // Small client-side paginator script
+      script(
+        content:
+            r"""
+          (function(){
+            function initPagination(){
+              var container = document.getElementById('posts-pagination');
+              if(!container) return;
+              var items = Array.prototype.slice.call(container.querySelectorAll('.post-item'));
+              var per = %d;
+              var total = Math.max(1, Math.ceil(items.length / per));
+              var pager = document.getElementById('posts-pager');
+              if(!pager) return;
+
+              function renderPager(current){
+                pager.innerHTML = '';
+                var prev = document.createElement('button');
+                prev.textContent = 'Prev';
+                prev.className = 'inline-flex items-center px-3 py-1 border rounded';
+                prev.disabled = current <= 1;
+                prev.onclick = function(){ showPage(Math.max(1, current-1)); };
+                pager.appendChild(prev);
+
+                for(var i=1;i<=total;i++){
+                  (function(i){
+                    var btn = document.createElement('button');
+                    btn.textContent = i.toString();
+                    btn.className = 'inline-flex items-center px-3 py-1 border rounded';
+                    if(i === current) btn.className += ' bg-primary text-primary-foreground';
+                    btn.onclick = function(){ showPage(i); };
+                    pager.appendChild(btn);
+                  })(i);
+                }
+
+                var next = document.createElement('button');
+                next.textContent = 'Next';
+                next.className = 'inline-flex items-center px-3 py-1 border rounded';
+                next.disabled = current >= total;
+                next.onclick = function(){ showPage(Math.min(total, current+1)); };
+                pager.appendChild(next);
+              }
+
+              function showPage(page){
+                items.forEach(function(it, idx){
+                  var p = parseInt(it.getAttribute('data-page') || '1', 10);
+                  it.style.display = (p === page) ? '' : 'none';
+                });
+                renderPager(page);
+                // scroll into view of pager
+                var nav = document.getElementById('posts-pager');
+                if(nav) nav.scrollIntoView({behavior: 'smooth', block: 'center'});
+              }
+
+              // initialize to first page
+              showPage(1);
+            }
+
+            if(document.readyState === 'loading'){
+              document.addEventListener('DOMContentLoaded', initPagination);
+            } else { initPagination(); }
+          })();
+        """
+                .replaceAll('%d', postsPerPage.toString()),
+      ),
     ]);
   }
 }
@@ -239,11 +323,9 @@ class PackageDetailView extends StatelessComponent {
         h3(classes: 'text-lg font-semibold tracking-tight text-card-foreground', [.text('Install')]),
         // Use same markdown code-block styling and language class so Prism and our .code-block styles apply
         div(classes: 'mt-3', [
-          
-            pre(classes: 'border border-border bg-muted p-4 text-sm overflow-x-auto', [
-              code(classes: 'language-dart', [.text('dart pub add $name')]),
-            ]),
-          
+          pre(classes: 'border border-border bg-muted p-4 text-sm overflow-x-auto', [
+            code(classes: 'language-dart', [.text('dart pub add $name')]),
+          ]),
         ]),
       ]),
     ]);
@@ -277,7 +359,7 @@ class PostDetailView extends StatelessComponent {
     final String content = post['content']?.toString() ?? '';
     final String date = post['date']?.toString() ?? '';
 
-    return article(classes: 'bg-card p-6 md:p-8', [
+    return article([
       if (date.isNotEmpty) ...[
         p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
           .text(date),
@@ -298,7 +380,7 @@ class PostDetailView extends StatelessComponent {
               return h2(classes: 'text-2xl font-semibold mt-6 mb-3', [.text(paragraph.substring(2))]);
             }
             if (paragraph.startsWith('- ')) {
-              final List<String> items = paragraph.split('\n').where((line) => line.trim().isNotEmpty).toList();
+              final List<String> items = paragraph.split('\n').where((row) => row.trim().isNotEmpty).toList();
               return ul(classes: 'list-disc list-inside space-y-1 mt-3', [
                 ...items.map((item) => li([.text(item.substring(2).trim())])),
               ]);

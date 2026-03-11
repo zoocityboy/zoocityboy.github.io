@@ -13,28 +13,7 @@ class PostLayout extends MyBaseLayout {
   @override
   Iterable<Component> buildHead(Page page) sync* {
     yield* super.buildHead(page);
-
-    // Add small script to annotate code blocks with data-lang for label display
-    yield script(
-      content: r"""
-          (function(){
-            function setLangLabels(){
-              document.querySelectorAll('.code-block').forEach(function(cb){
-                var code = cb.querySelector('code[class*="language-"]');
-                var lang = 'code';
-                if(code){
-                  var m = code.className.match(/language-([^\s]+)/);
-                  if(m) lang = m[1];
-                }
-                cb.setAttribute('data-lang', lang.toUpperCase());
-              });
-            }
-            if(document.readyState === 'loading'){
-              document.addEventListener('DOMContentLoaded', setLangLabels);
-            } else { setLangLabels(); }
-          })();
-        """,
-    );
+    yield codeBlockLanguageLabelScript();
   }
 
   @override
@@ -48,7 +27,7 @@ class PostLayout extends MyBaseLayout {
       subtitle: meta['description']?.toString(),
       child: slug.isNotEmpty
           ? PostDetailView(slug: slug)
-          : article(classes: 'bg-card p-6 md:p-8', [
+          : article([
               if (meta['date'] != null) ...[
                 p(classes: 'text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground', [
                   .text(meta['date'].toString()),

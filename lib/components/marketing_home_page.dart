@@ -1,7 +1,6 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:site/content/components/home/director.dart';
-import 'package:jaspr_content/jaspr_content.dart';
 import 'package:site/content/components/home/hero.dart';
 import 'package:site/content/components/home/recent_posts.dart';
 import 'package:site/content/components/home/recent_packages.dart';
@@ -18,11 +17,8 @@ class MarketingHomePage extends StatelessComponent {
   Component build(BuildContext context) {
     return Component.fragment([
       const NavComponent(),
-      main_(classes: '', [
-        section(classes: 'mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8', [
-          HeroBanner(),
-          // const HeroComponent(),
-        ]),
+      main_([
+        const HeroBanner(),
         div(classes: 'container mx-auto max-w-5xl px-4 py-8 overflow-x-hidden flex-1', [
           const DirectoryComponent(),
           const HomepageSpacer(),

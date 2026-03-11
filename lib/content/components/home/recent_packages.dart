@@ -1,6 +1,7 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_content/jaspr_content.dart';
+import 'package:site/content/components/home/section_title.dart';
 
 import '../../layouts/site_layouts.dart';
 
@@ -22,12 +23,7 @@ class RecentPackagesSection extends StatelessComponent {
     final recent = packages.take(3).toList();
 
     return section(classes: 'space-y-8 pb-20', [
-      div(classes: 'flex items-center justify-between', [
-        h2(classes: 'text-3xl font-semibold tracking-tight md:text-4xl', [.text('Recent packages')]),
-        a(href: prefixPath('/packages'), classes: 'text-sm font-semibold transition-colors hover:text-foreground', [
-          .text('All'),
-        ]),
-      ]),
+      const SectionTitle(title: 'Recent packages', actionLabel: 'All', actionHref: '/packages'),
       div(classes: 'grid gap-3 md:grid-cols-3', [
         if (recent.isEmpty)
           div(classes: 'pb-card p-6', [

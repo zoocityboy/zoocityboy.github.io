@@ -34,6 +34,7 @@ Future<void> main() async {
   ]);
   runApp(
     ContentApp.custom(
+      eagerlyLoadAllPages: true,
       loaders: [
         FilesystemLoader('content'),
       ],

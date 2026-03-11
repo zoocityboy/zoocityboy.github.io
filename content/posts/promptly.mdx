@@ -1,0 +1,61 @@
+---
+title: Promptly — Simple interactive prompts for Dart CLI apps
+description: A concise introduction and examples for using the `promptly` package to collect interactive input in Dart command-line tools.
+layout: post
+type: post
+date: 2026-02-27
+---
+
+`promptly` is a lightweight package for building interactive command-line experiences in Dart. It provides simple helpers for asking text input, confirmations, and sensitive input (passwords), so you can focus on the app logic rather than terminal plumbing.
+
+Why use `promptly`?
+
+- Small and focused: minimal surface area for common CLI prompts.
+- Async-friendly: works well in Dart `async`/`await` code.
+- Familiar developer ergonomics: prompt once, use the result.
+
+Getting started
+
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  promptly: ^0.1.0
+```
+
+Then import and use it in your CLI code. Typical usage looks like:
+
+```dart
+import 'package:promptly/promptly.dart';
+
+Future<void> main() async {
+  final name = await prompt('What is your name?');
+  final age = await prompt('How old are you?');
+  final confirm = await confirm('Proceed with these values?');
+
+  if (!confirm) {
+    print('Aborted.');
+    return;
+  }
+
+  print('Name: $name, Age: $age');
+}
+```
+
+Common patterns
+
+- Ask for sensitive input (passwords): many prompt helpers expose an option to hide input or provide a dedicated `password` prompt.
+- Provide defaults: pass a default value to a prompt so hitting enter accepts it.
+- Validate input: validate the user input synchronously or asynchronously before returning.
+
+Alternatives and ecosystem
+
+If you need full-featured terminal UIs (forms, lists, advanced input), consider packages such as `dart_console`, `prompter`, or higher-level TUI libraries. For simple interactive flows `promptly` keeps the surface area small and the code readable.
+
+Links
+
+- Package page: https://pub.dev/packages/promptly
+
+Wrapping up
+
+`promptly` is a pragmatic choice for small CLI utilities written in Dart. It reduces boilerplate for common interactive workflows and integrates naturally with `async` code. Try it when you need straightforward user prompts without a heavy dependency.

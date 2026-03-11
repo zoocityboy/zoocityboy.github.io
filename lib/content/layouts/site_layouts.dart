@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 // Do not import `dart:io` here: web builds don't support it.
 
 import 'package:jaspr/dom.dart';
@@ -37,8 +35,8 @@ String prefixPath(String path) {
   return '$base/$p';
 }
 
-final class baseHref extends StatelessComponent {
-  const baseHref({super.key});
+class BaseHrefTag extends StatelessComponent {
+  const BaseHrefTag({super.key});
 
   @override
   Component build(BuildContext context) {
@@ -50,13 +48,36 @@ final class baseHref extends StatelessComponent {
   }
 }
 
+Component codeBlockLanguageLabelScript() {
+  return script(
+    content: r"""
+      (function(){
+        function setLangLabels(){
+          document.querySelectorAll('.code-block').forEach(function(cb){
+            var code = cb.querySelector('code[class*="language-"]');
+            var lang = 'code';
+            if(code){
+              var m = code.className.match(/language-([^\s]+)/);
+              if(m) lang = m[1];
+            }
+            cb.setAttribute('data-lang', lang.toUpperCase());
+          });
+        }
+        if(document.readyState === 'loading'){
+          document.addEventListener('DOMContentLoaded', setLangLabels);
+        } else { setLangLabels(); }
+      })();
+    """,
+  );
+}
+
 abstract class MyBaseLayout extends PageLayoutBase {
   const MyBaseLayout();
 
   @override
   Iterable<Component> buildHead(Page page) sync* {
     yield* super.buildHead(page);
-    yield const baseHref();
+    yield const BaseHrefTag();
     yield meta(name: 'viewport', content: 'width=device-width, initial-scale=1');
     yield link(href: prefixPath('/styles.css'), rel: 'stylesheet', id: 'site-styles');
   }

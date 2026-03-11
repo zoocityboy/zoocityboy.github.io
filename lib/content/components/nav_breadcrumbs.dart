@@ -8,21 +8,22 @@ class NavBreadcrumbs extends StatelessComponent {
   final String activePath;
   final String? title;
 
+  String _sectionLabel() {
+    if (activePath == '/posts') return 'Blog';
+    if (activePath == '/packages') return 'Packages';
+    final value = activePath.replaceAll('/', '').trim();
+    return value.isEmpty ? 'Home' : value;
+  }
+
   @override
   Component build(BuildContext context) {
-    return // Breadcrumbs
-    nav(classes: 'text-sm text-muted-foreground py-2 space-y-6', [
+    return nav(classes: 'flex flex-wrap items-center gap-2 py-2 text-sm text-muted-foreground', [
       a(href: prefixPath('/'), classes: 'transition-colors hover:text-primary', [.text('Home')]),
       span(classes: 'px-2', [.text('/')]),
-      // section link based on activePath
       a(
         href: prefixPath(activePath),
         classes: 'transition-colors hover:text-primary',
-        [
-          .text(
-            activePath == '/posts' ? 'Blog' : (activePath == '/packages' ? 'Packages' : activePath.replaceAll('/', '')),
-          ),
-        ],
+        [.text(_sectionLabel())],
       ),
       if (title != null) ...[
         span(classes: 'px-2', [.text('/')]),

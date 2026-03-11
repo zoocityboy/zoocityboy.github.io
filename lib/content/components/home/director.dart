@@ -1,13 +1,15 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import 'section_title.dart';
+
 class DirectoryComponent extends StatelessComponent {
   const DirectoryComponent({super.key});
 
   @override
   Component build(BuildContext context) {
     return section(id: 'directory', classes: 'space-y-8 pb-20', [
-      h2(classes: 'text-3xl font-semibold tracking-tight md:text-4xl', [.text("What's in the directory")]),
+      const SectionTitle(title: "What's in the directory"),
       div(classes: 'grid gap-3 md:grid-cols-3', [
         _buildDirectoryCard(
           index: '01',

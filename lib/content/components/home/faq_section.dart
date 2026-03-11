@@ -1,13 +1,15 @@
 import 'package:jaspr/dom.dart';
 import 'package:jaspr/jaspr.dart';
 
+import 'section_title.dart';
+
 class FAQSection extends StatelessComponent {
   const FAQSection({super.key});
 
   @override
   Component build(BuildContext context) {
     return section(id: 'faq', classes: 'space-y-8 pb-20', [
-      h2(classes: 'text-3xl font-semibold tracking-tight md:text-4xl', [.text('Common questions')]),
+      const SectionTitle(title: 'Common questions'),
       div(classes: 'grid gap-3 md:grid-cols-2', [
         _FaqItem(
           number: '01',
@@ -36,7 +38,7 @@ class FAQSection extends StatelessComponent {
 }
 
 class _FaqItem extends StatelessComponent {
-  const _FaqItem({required this.number, required this.question, required this.answer, super.key});
+  const _FaqItem({required this.number, required this.question, required this.answer});
 
   final String number;
   final String question;
