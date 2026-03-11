@@ -1,0 +1,13 @@
+# Site Configuration
+titleBase: ZOOCITYBOY
+favicon: favicon.ico
+base: false
+
+# Social media links
+social:
+  - name: Github
+    url: https://github.com/zoocityboy
+  - name: X/Twitter
+    url: https://twitter.com/zoocityboy
+  - name: Bluesky
+    url: https://bsky.app/profile/zoocityboy.bsky.social

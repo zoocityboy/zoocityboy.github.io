@@ -1,0 +1,57 @@
+name: Publish GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'content/**'
+      - 'lib/**'
+      - 'web/**'
+      - 'pubspec.yaml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: publish-pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-publish:
+    name: Build site and publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Install dependencies
+        run: dart pub get
+        
+      - name: Install Jaspr CLI
+        run: dart pub global activate jaspr_cli
+
+      - name: Build web site
+        run: |
+          # Build the Jaspr site into the configured output directory
+          jaspr build
+          if [ -d build/jaspr ]; then echo "build/jaspr exists"; fi
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build/jaspr
+
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
