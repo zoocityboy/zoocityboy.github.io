@@ -97,13 +97,13 @@
   </head>
   <body>
     <!--@nav_component-->
-    <header class="border-b border-border bg-background">
+    <header class="sticky top-0 z-50 border-b border-border bg-background">
       <div class="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 md:px-8">
         <a class="text-sm font-semibold tracking-tight text-muted-foreground" href="/pr-preview/pr-2/">zoocityboy</a>
         <nav class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-[0.12em] md:flex">
           <a class="transition-colors hover:text-foreground text-muted-foreground" href="/pr-preview/pr-2/posts">Posts</a>
           <a class="transition-colors hover:text-foreground text-muted-foreground" href="/pr-preview/pr-2/packages">Packages</a>
-          <a class="pb-button-secondary px-4 py-2" href="https://github.com/zoocityboy">GitHub</a>
+          <a class="pb-button-secondary px-4 py-2" target="_blank" rel="noopener noreferrer" href="https://github.com/zoocityboy">GitHub</a>
           <!--@jaspr_content:theme_toggle-->
           <button class="theme-toggle" style="visibility: hidden" aria-label="Theme Toggle">
             <span><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="20px" height="20px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
@@ -118,7 +118,7 @@
             <span style="display: none"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="20px" height="20px"><circle cx="12" cy="12" r="4"></circle><path d="M12 4h.01"></path><path d="M20 12h.01"></path><path d="M12 20h.01"></path><path d="M4 12h.01"></path><path d="M17.657 6.343h.01"></path><path d="M17.657 17.657h.01"></path><path d="M6.343 17.657h.01"></path><path d="M6.343 6.343h.01"></path></svg></span>
           </button>
           <!--/@jaspr_content:theme_toggle-->
-          <button class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card p-1" aria-expanded="false" aria-label="Toggle menu">
+          <button class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card p-1" type="button" aria-expanded="false" aria-label="Toggle menu" aria-controls="mobile-nav-menu">
             <div class="space-y-1">
               <span class="block h-0.5 w-5 bg-foreground"></span>
               <span class="block h-0.5 w-5 bg-foreground"></span>
@@ -127,23 +127,25 @@
           </button>
         </div>
       </div>
-      <div class="md:hidden border-t border-border bg-background hidden">
+      <div id="mobile-nav-menu" class="md:hidden border-t border-border bg-background hidden" aria-hidden="true">
         <div class="mx-auto max-w-5xl px-6 py-4">
           <nav class="flex flex-col gap-3 text-sm font-semibold uppercase">
             <a class="transition-colors hover:text-foreground text-muted-foreground py-2" href="/pr-preview/pr-2/posts">Posts</a>
             <a class="transition-colors hover:text-foreground text-muted-foreground py-2" href="/pr-preview/pr-2/packages">Packages</a>
-            <a class="py-2" href="https://github.com/zoocityboy">GitHub</a>
+            <a class="py-2" target="_blank" rel="noopener noreferrer" href="https://github.com/zoocityboy">GitHub</a>
           </nav>
         </div>
       </div>
     </header>
     <!--/@nav_component-->
     <main>
-      <section class="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8">
-        <section class="grid gap-10 pb-20 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
-          <div class="space-y-10 gap-10 pb-20">
-            <div>
-              <pre class="hidden md:inline-flex pb-kicker items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3vw,12px)] leading-tight font-mono">
+      <div>
+        <div class="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8">
+          <section class="grid gap-10 pb-20 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+            <div class="gap-10">
+              <div class="space-y-5">
+                <div>
+                  <pre class="hidden md:inline-flex pb-kicker items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3vw,12px)] leading-tight font-mono">
 
  /$$$$$$$$  /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$ /$$$$$$$$ /$$     /$$ /$$$$$$$   /$$$$$$  /$$     /$$
 |_____ $$  /$$__  $$ /$$__  $$ /$$__  $$|_  $$_/|__  $$__/|  $$   /$$/| $$__  $$ /$$__  $$|  $$   /$$/
@@ -156,7 +158,7 @@
 
 
 </pre>
-              <pre class="md:hidden pb-kicker items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3vw,12px)] leading-tight font-mono">
+                  <pre class="md:hidden pb-kicker items-center py-1 w-full max-w-full overflow-x-auto whitespace-pre text-[clamp(8px,3vw,12px)] leading-tight font-mono">
 
  /$$$$$$$$  /$$$$$$   /$$$$$$ 
 |_____ $$  /$$__  $$ /$$__  $$
@@ -183,20 +185,19 @@
 | $$$$$$$/|  $$$$$$/    | $$    
 |_______/  \______/     |__/
 </pre>
+                </div>
+              </div>
+              <p class="pb-kicker inline-flex items-center border bg-secondary px-3 py-1">Context for user</p>
+              <h1 class="max-w-[18ch] text-4xl font-semibold leading-tight tracking-tighter md:text-6xl">
+                Dart developer*<br/><span class="text-2xl md:text-4xl text-muted-foreground">Flutter, Jaspr, Nocterm.</span>
+              </h1>
             </div>
-            <h1 class="max-w-[18ch] text-4xl font-semibold leading-tight tracking-tighter md:text-6xl">
-              Dart developer*<br/><span class="text-2xl md:text-4xl text-muted-foreground">Flutter, Jaspr, Nocterm.</span>
-            </h1>
-            <p class="pb-kicker inline-flex items-center border bg-secondary px-3 py-1">Context for user</p>
-            <p class="max-w-[56ch] text-sm leading-7 text-muted-foreground md:text-base">
-              Zoocityboy is a software developer and open source enthusiast who loves building tools that empower other developers. This site is a collection of his work, including packages, blog posts, and projects.
-            </p>
-          </div>
-        </section>
-      </section>
+          </section>
+        </div>
+      </div>
       <div class="container mx-auto max-w-5xl px-4 py-8 overflow-x-hidden flex-1">
         <section id="directory" class="space-y-8 pb-20">
-          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">What's in the directory</h2>
+          <div class="flex items-center justify-between"><h2 class="text-3xl font-semibold tracking-tight md:text-4xl">What's in the directory</h2></div>
           <div class="grid gap-3 md:grid-cols-3">
             <article class="pb-card p-6">
               <p class="pb-kicker">01</p>
@@ -221,7 +222,31 @@
             <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Recent posts</h2>
             <a class="text-sm font-semibold transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts">All</a>
           </div>
-          <div class="grid gap-3 md:grid-cols-3"><div class="pb-card p-6"><p class="text-sm text-muted-foreground">No posts yet.</p></div></div>
+          <div class="grid gap-3 md:grid-cols-3">
+            <article class="pb-card p-6">
+              <p class="pb-kicker">2026-02-27</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">
+                <a class="transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts/promptly">Promptly — Simple interactive prompts for Dart CLI apps</a>
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">
+                A concise introduction and examples for using the `promptly` package to collect interactive input in Dart command-line tools.
+              </p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">2026-02-24</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">
+                <a class="transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts/third-post">Small Enhancements and Fixes</a>
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">A quick roundup of small fixes and improvements applied to the site.</p>
+            </article>
+            <article class="pb-card p-6">
+              <p class="pb-kicker">2026-02-23</p>
+              <h3 class="mt-3 text-xl font-semibold tracking-tight text-card-foreground">
+                <a class="transition-colors hover:text-foreground" href="/pr-preview/pr-2/posts/second-post">Using YAML Data for Package Pages</a>
+              </h3>
+              <p class="mt-3 text-sm leading-6 text-muted-foreground">Driving package list and detail views from a single data source.</p>
+            </article>
+          </div>
         </section>
         <div class="text-muted-foreground/30 font-mono text-sm select-none space-y-8 pb-6" aria-hidden="true">//</div>
         <section class="space-y-8 pb-20">
@@ -254,7 +279,7 @@
         </section>
         <div class="text-muted-foreground/30 font-mono text-sm select-none space-y-8 pb-6" aria-hidden="true">//</div>
         <section id="faq" class="space-y-8 pb-20">
-          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Common questions</h2>
+          <div class="flex items-center justify-between"><h2 class="text-3xl font-semibold tracking-tight md:text-4xl">Common questions</h2></div>
           <div class="grid gap-3 md:grid-cols-2">
             <article class="pb-card p-6">
               <p class="pb-kicker">01</p>

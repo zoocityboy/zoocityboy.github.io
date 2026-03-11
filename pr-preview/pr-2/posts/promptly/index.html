@@ -2,11 +2,11 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Legacy About | ZOOCITYBOY</title>
-    <meta property="og:title" content="Legacy About | ZOOCITYBOY"/>
+    <title>Promptly — Simple interactive prompts for Dart CLI apps | ZOOCITYBOY</title>
+    <meta property="og:title" content="Promptly — Simple interactive prompts for Dart CLI apps | ZOOCITYBOY"/>
     <link href="favicon.ico" rel="icon" type="image/png"/>
-    <meta name="description" content="Legacy page retained during migration to blog and packages sections."/>
-    <meta property="og:description" content="Legacy page retained during migration to blog and packages sections."/>
+    <meta name="description" content="A concise introduction and examples for using the `promptly` package to collect interactive input in Dart command-line tools."/>
+    <meta property="og:description" content="A concise introduction and examples for using the `promptly` package to collect interactive input in Dart command-line tools."/>
     <base href="/pr-preview/pr-2/"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link id="site-styles" href="/pr-preview/pr-2/styles.css" rel="stylesheet"/>
@@ -182,21 +182,91 @@
         <span class="px-2">/</span>
         <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts">Blog</a>
         <span class="px-2">/</span>
-        <span class="font-medium text-foreground">Legacy About</span>
+        <span class="font-medium text-foreground">Promptly — Simple interactive prompts for Dart CLI apps</span>
       </nav>
-      <h1 class="text-4xl font-semibold tracking-tighter md:text-5xl">Legacy About</h1>
-      <p class="mt-4 max-w-[64ch] text-sm leading-7 text-muted-foreground md:text-base">Legacy page retained during migration to blog and packages sections.</p>
+      <h1 class="text-4xl font-semibold tracking-tighter md:text-5xl">Promptly — Simple interactive prompts for Dart CLI apps</h1>
+      <p class="mt-4 max-w-[64ch] text-sm leading-7 text-muted-foreground md:text-base">
+        A concise introduction and examples for using the `promptly` package to collect interactive input in Dart command-line tools.
+      </p>
       <div class="mt-8 border-t border-border"></div>
       <div class="mt-8">
         <article>
-          <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-23</p>
+          <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-27</p>
           <div class="mt-4 border-t border-border"></div>
           <div class="prose prose-sm mt-6 max-w-none text-foreground">
             <section class="content">
               <p>
-                This page is retained as an example markdown page while the site transitions to the new content architecture.
+                <code>promptly</code> is a lightweight package for building interactive command-line experiences in Dart. It provides simple helpers for asking text input, confirmations, and sensitive input (passwords), so you can focus on the app logic rather than terminal plumbing.
               </p>
-              <p>You can safely remove this file later if you no longer need an about-style post.</p>
+              <p>Why use <code>promptly</code>?</p>
+              <ul>
+                <li>Small and focused: minimal surface area for common CLI prompts.</li>
+                <li>Async-friendly: works well in Dart <code>async</code>/<code>await</code> code.</li>
+                <li>Familiar developer ergonomics: prompt once, use the result.</li>
+              </ul>
+              <p>Getting started</p>
+              <p>Add the package to your <code>pubspec.yaml</code>:</p>
+              <div class="code-block">
+                <!--@jaspr_content_snippets:client-->
+                <button>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="18px" height="18px">
+                    <rect rx="2" ry="2" x="8" y="8" width="14" height="14"></rect>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                  </svg>
+                </button>
+                <!--/@jaspr_content_snippets:client-->
+                <pre><code><span><span class="property">dependencies</span>:
+  <span class="property">promptly</span>: <span class="string">^0.1.0</span></span></code></pre>
+              </div>
+              <p>Then import and use it in your CLI code. Typical usage looks like:</p>
+              <div class="code-block">
+                <!--@jaspr_content_snippets:client-->
+                <button>
+                  <svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="18px" height="18px">
+                    <rect rx="2" ry="2" x="8" y="8" width="14" height="14"></rect>
+                    <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+                  </svg>
+                </button>
+                <!--/@jaspr_content_snippets:client-->
+                <pre><code><span><span class="keyword">import</span> <span class="string">'package:promptly/promptly.dart'</span>;
+
+<span class="source">Future</span>&lt;<span class="keyword void">void</span>&gt; <span class="function declaration static">main</span>() <span class="keyword control">async</span> {
+  <span class="keyword">final</span> name = <span class="keyword control">await</span> <span class="source">prompt</span>(<span class="string">'What is your name?'</span>);
+  <span class="keyword">final</span> age = <span class="keyword control">await</span> <span class="source">prompt</span>(<span class="string">'How old are you?'</span>);
+  <span class="keyword">final</span> confirm = <span class="keyword control">await</span> <span class="source">confirm</span>(<span class="string">'Proceed with these values?'</span>);
+
+  <span class="keyword control">if</span> (!<span class="source">confirm</span>) {
+    <span class="source">print</span>(<span class="string">'Aborted.'</span>);
+    <span class="keyword control">return</span>;
+  }
+
+  <span class="source">print</span>(<span class="string">'Name: </span><span class="source interpolation">$</span><span class="source">name</span><span class="string">, Age: </span><span class="source interpolation">$</span><span class="source">age</span><span class="string">'</span>);
+}</span></code></pre>
+              </div>
+              <p>Common patterns</p>
+              <ul>
+                <li>
+                  Ask for sensitive input (passwords): many prompt helpers expose an option to hide input or provide a dedicated 
+                  <code>password</code> prompt.
+                </li>
+                <li>Provide defaults: pass a default value to a prompt so hitting enter accepts it.</li>
+                <li>Validate input: validate the user input synchronously or asynchronously before returning.</li>
+              </ul>
+              <p>Alternatives and ecosystem</p>
+              <p>
+                If you need full-featured terminal UIs (forms, lists, advanced input), consider packages such as <code>dart_console</code>, 
+                <code>prompter</code>, or higher-level TUI libraries. For simple interactive flows <code>promptly</code>
+                 keeps the surface area small and the code readable.
+              </p>
+              <p>Links</p>
+              <ul>
+                <li>Package page: <a href="https://pub.dev/packages/promptly">https://pub.dev/packages/promptly</a></li>
+              </ul>
+              <p>Wrapping up</p>
+              <p>
+                <code>promptly</code> is a pragmatic choice for small CLI utilities written in Dart. It reduces boilerplate for common interactive workflows and integrates naturally with 
+                <code>async</code> code. Try it when you need straightforward user prompts without a heavy dependency.
+              </p>
             </section>
           </div>
         </article>

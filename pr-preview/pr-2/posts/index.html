@@ -2,8 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8"/>
-    <title>Zoolog | ZOOCITYBOY</title>
-    <meta property="og:title" content="Zoolog | ZOOCITYBOY"/>
+    <title>Posts | ZOOCITYBOY</title>
+    <meta property="og:title" content="Posts | ZOOCITYBOY"/>
     <link href="favicon.ico" rel="icon" type="image/png"/>
     <meta name="description" content="Notes, updates, and implementation details."/>
     <meta property="og:description" content="Notes, updates, and implementation details."/>
@@ -116,13 +116,13 @@
   </head>
   <body>
     <!--@nav_component-->
-    <header class="border-b border-border bg-background">
+    <header class="sticky top-0 z-50 border-b border-border bg-background">
       <div class="mx-auto flex h-16 w-full max-w-5xl items-center justify-between px-6 md:px-8">
         <a class="text-sm font-semibold tracking-tight text-muted-foreground" href="/pr-preview/pr-2/">zoocityboy</a>
         <nav class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-[0.12em] md:flex">
           <a class="transition-colors hover:text-foreground text-muted-foreground" href="/pr-preview/pr-2/posts">Posts</a>
           <a class="transition-colors hover:text-foreground text-muted-foreground" href="/pr-preview/pr-2/packages">Packages</a>
-          <a class="pb-button-secondary px-4 py-2" href="https://github.com/zoocityboy">GitHub</a>
+          <a class="pb-button-secondary px-4 py-2" target="_blank" rel="noopener noreferrer" href="https://github.com/zoocityboy">GitHub</a>
           <!--@jaspr_content:theme_toggle-->
           <button class="theme-toggle" style="visibility: hidden" aria-label="Theme Toggle">
             <span><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="20px" height="20px"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path></svg></span>
@@ -137,7 +137,7 @@
             <span style="display: none"><svg fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" width="20px" height="20px"><circle cx="12" cy="12" r="4"></circle><path d="M12 4h.01"></path><path d="M20 12h.01"></path><path d="M12 20h.01"></path><path d="M4 12h.01"></path><path d="M17.657 6.343h.01"></path><path d="M17.657 17.657h.01"></path><path d="M6.343 17.657h.01"></path><path d="M6.343 6.343h.01"></path></svg></span>
           </button>
           <!--/@jaspr_content:theme_toggle-->
-          <button class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card p-1" aria-expanded="false" aria-label="Toggle menu">
+          <button class="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-card p-1" type="button" aria-expanded="false" aria-label="Toggle menu" aria-controls="mobile-nav-menu">
             <div class="space-y-1">
               <span class="block h-0.5 w-5 bg-foreground"></span>
               <span class="block h-0.5 w-5 bg-foreground"></span>
@@ -146,64 +146,127 @@
           </button>
         </div>
       </div>
-      <div class="md:hidden border-t border-border bg-background hidden">
+      <div id="mobile-nav-menu" class="md:hidden border-t border-border bg-background hidden" aria-hidden="true">
         <div class="mx-auto max-w-5xl px-6 py-4">
           <nav class="flex flex-col gap-3 text-sm font-semibold uppercase">
             <a class="transition-colors hover:text-foreground text-muted-foreground py-2" href="/pr-preview/pr-2/posts">Posts</a>
             <a class="transition-colors hover:text-foreground text-muted-foreground py-2" href="/pr-preview/pr-2/packages">Packages</a>
-            <a class="py-2" href="https://github.com/zoocityboy">GitHub</a>
+            <a class="py-2" target="_blank" rel="noopener noreferrer" href="https://github.com/zoocityboy">GitHub</a>
           </nav>
         </div>
       </div>
     </header>
     <!--/@nav_component-->
     <main class="mx-auto w-full max-w-5xl px-6 pb-24 pt-10 md:px-8">
-      <nav class="text-sm text-muted-foreground py-2 space-y-6">
+      <nav class="flex flex-wrap items-center gap-2 py-2 text-sm text-muted-foreground">
         <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/">Home</a>
         <span class="px-2">/</span>
         <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts">Blog</a>
         <span class="px-2">/</span>
-        <span class="font-medium text-foreground">Zoolog</span>
+        <span class="font-medium text-foreground">Posts</span>
       </nav>
-      <h1 class="text-4xl font-semibold tracking-tighter md:text-5xl">Zoolog</h1>
+      <h1 class="text-4xl font-semibold tracking-tighter md:text-5xl">Posts</h1>
       <p class="mt-4 max-w-[64ch] text-sm leading-7 text-muted-foreground md:text-base">Notes, updates, and implementation details.</p>
       <div class="mt-8 border-t border-border"></div>
       <div class="mt-8">
         <div class="space-y-8">
           <section class="content"><p>All posts are written in markdown and rendered through a custom blog layout.</p></section>
-          <div class="grid gap-3">
-            <article class="py-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-24</p>
-              <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
-                <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/third-post">Small Enhancements and Fixes</a>
-              </h2>
-              <p class="mt-3 text-sm leading-6 text-muted-foreground">A quick roundup of small fixes and improvements applied to the site.</p>
-              <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/third-post">Read post</a>
-            </article>
-            <article class="py-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-23</p>
-              <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
-                <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/second-post">Using YAML Data for Package Pages</a>
-              </h2>
-              <p class="mt-3 text-sm leading-6 text-muted-foreground">Driving package list and detail views from a single data source.</p>
-              <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/second-post">Read post</a>
-            </article>
-            <article class="py-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-22</p>
-              <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
-                <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/first-post">Building a Tailwind-powered Jaspr Site</a>
-              </h2>
-              <p class="mt-3 text-sm leading-6 text-muted-foreground">How this site moved from a docs scaffold to a custom content architecture.</p>
-              <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/first-post">Read post</a>
-            </article>
-            <article class="py-6">
-              <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2023-08-16</p>
-              <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
-                <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/modern-pageable-list-view-with-cubit">Modern Pageable list view for Flutter with Cubit</a>
-              </h2>
-              <p class="mt-3 text-sm leading-6 text-muted-foreground">Optimized pageable ListView pattern for Flutter using Cubit and per-page caching.</p>
-              <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/modern-pageable-list-view-with-cubit">Read post</a>
-            </article>
+          <div class="space-y-6">
+            <div id="posts-pagination" class="grid gap-3">
+              <article id="post-0" class="post-item py-6" data-page="1">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-24</p>
+                <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
+                  <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/third-post">Small Enhancements and Fixes</a>
+                </h2>
+                <p class="mt-3 text-sm leading-6 text-muted-foreground">A quick roundup of small fixes and improvements applied to the site.</p>
+                <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/third-post">Read post</a>
+              </article>
+              <article id="post-1" class="post-item py-6" data-page="1">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-23</p>
+                <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
+                  <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/second-post">Using YAML Data for Package Pages</a>
+                </h2>
+                <p class="mt-3 text-sm leading-6 text-muted-foreground">Driving package list and detail views from a single data source.</p>
+                <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/second-post">Read post</a>
+              </article>
+              <article id="post-2" class="post-item py-6" data-page="2">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2026-02-22</p>
+                <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
+                  <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/first-post">Building a Tailwind-powered Jaspr Site</a>
+                </h2>
+                <p class="mt-3 text-sm leading-6 text-muted-foreground">How this site moved from a docs scaffold to a custom content architecture.</p>
+                <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/first-post">Read post</a>
+              </article>
+              <article id="post-3" class="post-item py-6" data-page="2">
+                <p class="text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">2023-08-16</p>
+                <h2 class="mt-3 text-2xl font-semibold tracking-tight text-card-foreground">
+                  <a class="transition-colors hover:text-primary" href="/pr-preview/pr-2/posts/modern-pageable-list-view-with-cubit">Modern Pageable list view for Flutter with Cubit</a>
+                </h2>
+                <p class="mt-3 text-sm leading-6 text-muted-foreground">Optimized pageable ListView pattern for Flutter using Cubit and per-page caching.</p>
+                <a class="mt-5 inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-semibold text-foreground transition-colors hover:bg-accent" href="/pr-preview/pr-2/posts/modern-pageable-list-view-with-cubit">Read post</a>
+              </article>
+            </div>
+            <nav class="flex items-center justify-center space-x-3"><div id="posts-pager" class="inline-flex items-center space-x-2"></div></nav>
+            <script>
+                        (function(){
+                          function initPagination(){
+                            var container = document.getElementById('posts-pagination');
+                            if(!container) return;
+                            var items = Array.prototype.slice.call(container.querySelectorAll('.post-item'));
+                            var per = 2;
+                            var total = Math.max(1, Math.ceil(items.length / per));
+                            var pager = document.getElementById('posts-pager');
+                            if(!pager) return;
+              
+                            function renderPager(current){
+                              pager.innerHTML = '';
+                              var prev = document.createElement('button');
+                              prev.textContent = 'Prev';
+                              prev.className = 'inline-flex items-center px-3 py-1 border rounded';
+                              prev.disabled = current <= 1;
+                              prev.onclick = function(){ showPage(Math.max(1, current-1)); };
+                              pager.appendChild(prev);
+              
+                              for(var i=1;i<=total;i++){
+                                (function(i){
+                                  var btn = document.createElement('button');
+                                  btn.textContent = i.toString();
+                                  btn.className = 'inline-flex items-center px-3 py-1 border rounded';
+                                  if(i === current) btn.className += ' bg-primary text-primary-foreground';
+                                  btn.onclick = function(){ showPage(i); };
+                                  pager.appendChild(btn);
+                                })(i);
+                              }
+              
+                              var next = document.createElement('button');
+                              next.textContent = 'Next';
+                              next.className = 'inline-flex items-center px-3 py-1 border rounded';
+                              next.disabled = current >= total;
+                              next.onclick = function(){ showPage(Math.min(total, current+1)); };
+                              pager.appendChild(next);
+                            }
+              
+                            function showPage(page){
+                              items.forEach(function(it, idx){
+                                var p = parseInt(it.getAttribute('data-page') || '1', 10);
+                                it.style.display = (p === page) ? '' : 'none';
+                              });
+                              renderPager(page);
+                              // scroll into view of pager
+                              var nav = document.getElementById('posts-pager');
+                              if(nav) nav.scrollIntoView({behavior: 'smooth', block: 'center'});
+                            }
+              
+                            // initialize to first page
+                            showPage(1);
+                          }
+              
+                          if(document.readyState === 'loading'){
+                            document.addEventListener('DOMContentLoaded', initPagination);
+                          } else { initPagination(); }
+                        })();
+                      
+            </script>
           </div>
         </div>
       </div>
